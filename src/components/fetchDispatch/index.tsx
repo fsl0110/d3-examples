@@ -1,8 +1,7 @@
 import React, { FC } from "react";
 import { useFetch } from "../../hooks";
 import { AxiosPromise } from "axios";
-
-export type Data = (Date | number)[];
+import { Data } from "../types";
 
 export interface Props {
   loadingIndicator?: JSX.Element;

@@ -4,13 +4,13 @@ import { Dimensions } from "../types";
 
 export interface CrossProps extends SVGAttributes<SVGGElement> {
   /** Pass Data for calculations. */
-  data: any; // TODO: Replace by generic
+  data?: any; // TODO: Replace by generic
 
   /** Pass Scales for calculations. */
-  scales: any; // TODO: Replace by generic
+  scales?: any; // TODO: Replace by generic
 
   /** Pass Dimesions for calculations */
-  dim: Dimensions;
+  dim?: Dimensions;
 
   /**
    * Wether to hide Cross-Lines e.g. in order to appear only on mouseover.
@@ -151,7 +151,8 @@ export const Cross: FC<CrossProps> = ({
     full: boolean,
     fullX: boolean,
     cross: number | undefined,
-    crossX: number | undefined
+    crossX: number | undefined,
+    dim: Dimensions
   ) => {
     if (cross || crossX) {
       return scales.y(item[1]) + 1 - (crossX! || cross!);
@@ -169,7 +170,8 @@ export const Cross: FC<CrossProps> = ({
     full: boolean,
     fullY: boolean,
     cross: number | undefined,
-    crossY: number | undefined
+    crossY: number | undefined,
+    dim: Dimensions
   ) => {
     if (cross || crossY) {
       return scales.x(item[0]) + (crossY || cross);
@@ -182,6 +184,10 @@ export const Cross: FC<CrossProps> = ({
     return scales.x(item[0]);
   };
 
+  if (!dim) {
+    return null;
+  }
+
   return (
     <g className={classNames("cross", className)}>
       {data.map((item: any, i: number) => (
@@ -193,7 +199,7 @@ export const Cross: FC<CrossProps> = ({
             x1={scales.x(item[0]) + 1}
             x2={scales.x(item[0]) + 1}
             y1={dim.height - dim.margin.top - dim.margin.bottom}
-            y2={setXCross(item, full, fullX, cross, crossX)}
+            y2={setXCross(item, full, fullX, cross, crossX, dim)}
             stroke={colorX || color}
             strokeWidth={widthX || width}
             strokeDasharray={dashX || dash}
@@ -203,7 +209,7 @@ export const Cross: FC<CrossProps> = ({
             className="y-cross-line"
             opacity={hideY || hide ? 0 : 1}
             x1={0}
-            x2={setYCross(item, full, fullY, cross, crossY)}
+            x2={setYCross(item, full, fullY, cross, crossY, dim)}
             y1={scales.y(item[1])}
             y2={scales.y(item[1])}
             stroke={colorY || color}

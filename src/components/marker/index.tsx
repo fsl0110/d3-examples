@@ -3,10 +3,12 @@ import classNames from "classnames";
 
 export interface MarkerProps extends SVGAttributes<SVGGElement> {
   /** Pass Data for calculations. */
-  data: any; // TODO: Replace by generic
+  data?: any; // TODO: Replace by generic
 
   /** Pass Scales for calculations. */
-  scales: any; // TODO: Replace by generic
+  scales?: any; // TODO: Replace by generic
+
+  dim?: any;
 
   /** Define a radius for the circle.
    * If 0 no circle will be shown.

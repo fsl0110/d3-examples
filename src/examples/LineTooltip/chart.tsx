@@ -4,7 +4,7 @@ import styled from "styled-components";
 import moment from "moment";
 import _ from "lodash";
 import { Dimensions } from "../../components/types";
-import { Axis, Line, Tooltip } from "../../components";
+import { Axis, Line, Tooltip, Values, Cross, Marker } from "../../components";
 
 const StyledDiv = styled.div`
   svg {
@@ -58,7 +58,11 @@ export const Chart: FC<Props> = ({ data }) => {
         <g transform={`translate(${margin.left}, ${margin.top})`}>
           <g transform={`translate(${margin.left}, ${margin.top})`}>
             <Line data={newData} scales={scales} />
-            <Tooltip data={newData} scales={scales} dim={d} />
+            <Tooltip data={newData} scales={scales} dim={d}>
+              <Values />
+              {/*       <Marker /> */}
+              {/*     <Cross /> */}
+            </Tooltip>
           </g>
           <g transform={`translate(${margin.left}, ${0})`}>
             <Axis

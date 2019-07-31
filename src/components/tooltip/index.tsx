@@ -1,4 +1,4 @@
-import React, { FC, useState, SVGAttributes } from "react";
+import React, { FC, useState, SVGAttributes, ReactNode } from "react";
 import * as d3 from "d3";
 import { Dimensions } from "../types";
 import { Values, Cross, Marker } from "..";
@@ -12,9 +12,11 @@ interface TooltipPorps extends SVGAttributes<SVGGElement> {
 
   /** Pass Dimesions for calculations */
   dim: Dimensions;
+
+  children: ReactNode | ReactNode[];
 }
 
-export const Tooltip: FC<TooltipPorps> = ({ data, scales, dim }) => {
+export const Tooltip: FC<TooltipPorps> = ({ data, scales, dim, children }) => {
   /** CurrentData is one DataSet of the data array. */
   const [currentData, setCurrentData] = useState([]);
 
@@ -33,10 +35,19 @@ export const Tooltip: FC<TooltipPorps> = ({ data, scales, dim }) => {
             setCurrentData(data[i - 1]);
           }
         }}
-        onMouseOut={() => {
+        /*         onMouseOut={() => {
           setCurrentData([]);
-        }}
+        }} */
       />
+      {currentData.length &&
+        React.Children.map(children, child =>
+          React.cloneElement(child as never, {
+            data: [currentData],
+            scales,
+            dim
+          })
+        )}
+      {/* 
       {currentData.length && (
         <>
           <Values data={[currentData]} scales={scales} />
@@ -48,7 +59,7 @@ export const Tooltip: FC<TooltipPorps> = ({ data, scales, dim }) => {
             full={true}
             color="red"
           />
-        </>
+        </> */}
       )}
     </g>
   );

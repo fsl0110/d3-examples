@@ -8,13 +8,11 @@ const StyledDiv = styled.div`
   width: 100%;
 `;
 
-type Data = (Date | number)[];
-
 export const BarChart: FC = () => {
   return (
     <StyledDiv>
       <FetchDispatch fetch={axiosOpenFDA(openFDA.foodEnforcementReports(""))}>
-        {(data: Data) => <Chart data={data} />}
+        {(data: any) => <Chart data={data} />}
       </FetchDispatch>
     </StyledDiv>
   );

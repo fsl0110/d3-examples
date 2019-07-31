@@ -11,4 +11,4 @@ export type Margin = {
   right: number;
 };
 
-export type Data = (Date | number | string)[];
+export type Data = [(Date | number | string), (Date | number | string)];
