@@ -1,15 +1,11 @@
 import React, { FC, SVGAttributes } from "react";
 import classNames from "classnames";
-import { Text } from "..";
 import { StyledLegendsG } from "./styles";
-import { Dimensions } from "../types";
+import { SharedProps } from "../types";
 
-export interface LegendProps extends SVGAttributes<SVGGElement> {
+export interface LegendProps extends SharedProps, SVGAttributes<SVGGElement> {
   /** Pass Items to show in Legend. */
   items: string[];
-
-  /** Pass Dimensions for calculations. */
-  dim: Dimensions;
 
   /** Define the position of the legend. */
   position?: "top" | "left" | "bottom" | "right";
@@ -32,7 +28,7 @@ export const Legend: FC<LegendProps> = ({ items, className }) => {
   return (
     <StyledLegendsG transform={`translate(${20}, ${250})`}>
       <foreignObject className="foreign">
-        <div className="legends">
+        <div className={classNames("legends", className)}>
           {items.map((item: any, i: number) => (
             <div className="legend" key={i}>
               <div className="legend__decorator" />
@@ -41,13 +37,6 @@ export const Legend: FC<LegendProps> = ({ items, className }) => {
           ))}
         </div>
       </foreignObject>
-
-      {/*       {items.map((item: any, i: number) => (
-        <g className="legend" key={i} transform={`translate(${0}, ${0})`}>
-          <circle radius={5} fill="red" />
-          <Text>{item}</Text>
-        </g>
-      ))} */}
     </StyledLegendsG>
   );
 };

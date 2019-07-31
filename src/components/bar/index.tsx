@@ -1,18 +1,9 @@
 import React, { FC, useRef, useEffect, SVGAttributes } from "react";
 import classNames from "classnames";
 import * as d3 from "d3";
-import { Dimensions } from "../types";
+import { SharedProps } from "../types";
 
-export interface BarProps extends SVGAttributes<SVGGElement> {
-  /** Pass Data for calculations. */
-  data: any; // TODO: Replace by generic
-
-  /** Pass Scales for calculations. */
-  scales: { x: any; y: any }; // TODO: Replace by generic
-
-  /** Pass Dimensions for calculations. */
-  dim: Dimensions;
-
+export interface BarProps extends SharedProps, SVGAttributes<SVGGElement> {
   /** No Childrens allowed */
   children?: never;
 }
@@ -21,6 +12,10 @@ export const Bar: FC<BarProps> = ({ data, scales, dim }) => {
   const el = useRef<any>(null);
 
   useEffect(() => {
+    if (!scales || !dim || !data) {
+      return undefined;
+    }
+
     const bar = d3
       .select(el.current)
       .selectAll("rect")
@@ -56,7 +51,7 @@ export const Bar: FC<BarProps> = ({ data, scales, dim }) => {
       .style("font-size", "14px")
       .style("font-family", "arial")
       .attr("text-anchor", "middle");
-  }, []);
+  }, [scales, data, dim]);
 
   return <g className={classNames("bar", classNames)} ref={el} />;
 };

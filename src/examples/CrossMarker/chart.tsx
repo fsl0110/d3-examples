@@ -61,10 +61,10 @@ export const Chart: FC<Props> = ({ data }) => {
             <Marker data={newData} scales={scales} />
           </g>
           <g transform={`translate(${margin.left}, ${0})`}>
-            <Axis align="axisLeft" scale={y} dim={d} />
+            <Axis align="axisLeft" scales={y} dim={d} />
           </g>
           <g transform={`translate(${margin.left}, ${height - margin.bottom})`}>
-            <Axis align="axisBottom" scale={x} dim={d} />
+            <Axis align="axisBottom" scales={x} dim={d} />
           </g>
         </g>
       </svg>

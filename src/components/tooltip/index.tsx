@@ -1,18 +1,8 @@
 import React, { FC, useState, SVGAttributes, ReactNode } from "react";
 import * as d3 from "d3";
-import { Dimensions } from "../types";
-import { Values, Cross, Marker } from "..";
+import { SharedProps } from "../types";
 
-interface TooltipPorps extends SVGAttributes<SVGGElement> {
-  /** Pass Data for calculations. */
-  data: any; // TODO: Replace by generic
-
-  /** Pass Scales for calculations. */
-  scales: any; // TODO: Replace by generic
-
-  /** Pass Dimesions for calculations */
-  dim: Dimensions;
-
+interface TooltipPorps extends SharedProps, SVGAttributes<SVGGElement> {
   children: ReactNode | ReactNode[];
 }
 
@@ -20,7 +10,11 @@ export const Tooltip: FC<TooltipPorps> = ({ data, scales, dim, children }) => {
   /** CurrentData is one DataSet of the data array. */
   const [currentData, setCurrentData] = useState([]);
 
-  let bisectMouseValue = d3.bisector((d: any) => d[0]).right;
+  if (!scales || !dim || !data) {
+    return null;
+  }
+
+  let bisectMouseValue = d3.bisector((d: any) => d[0]).left;
 
   return (
     <g>
@@ -35,11 +29,12 @@ export const Tooltip: FC<TooltipPorps> = ({ data, scales, dim, children }) => {
             setCurrentData(data[i - 1]);
           }
         }}
-        /*         onMouseOut={() => {
+        onMouseOut={() => {
           setCurrentData([]);
-        }} */
+        }}
       />
       {currentData.length &&
+        children &&
         React.Children.map(children, child =>
           React.cloneElement(child as never, {
             data: [currentData],
@@ -47,20 +42,6 @@ export const Tooltip: FC<TooltipPorps> = ({ data, scales, dim, children }) => {
             dim
           })
         )}
-      {/* 
-      {currentData.length && (
-        <>
-          <Values data={[currentData]} scales={scales} />
-          <Marker data={[currentData]} scales={scales} />
-          <Cross
-            data={[currentData]}
-            scales={scales}
-            dim={dim}
-            full={true}
-            color="red"
-          />
-        </> */}
-      )}
     </g>
   );
 };

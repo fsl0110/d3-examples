@@ -1,15 +1,8 @@
 import React, { FC, SVGAttributes } from "react";
 import classNames from "classnames";
+import { SharedProps } from "../types";
 
-export interface MarkerProps extends SVGAttributes<SVGGElement> {
-  /** Pass Data for calculations. */
-  data?: any; // TODO: Replace by generic
-
-  /** Pass Scales for calculations. */
-  scales?: any; // TODO: Replace by generic
-
-  dim?: any;
-
+export interface MarkerProps extends SharedProps, SVGAttributes<SVGGElement> {
   /** Define a radius for the circle.
    * If 0 no circle will be shown.
    * @default 5
@@ -35,11 +28,16 @@ export interface MarkerProps extends SVGAttributes<SVGGElement> {
 export const Marker: FC<MarkerProps> = ({
   data,
   scales,
+  dim,
   radius = 5,
   color = "red",
   width = 2,
   className
 }) => {
+  if (!scales || !dim || !data) {
+    return null;
+  }
+
   return (
     <g className={classNames("marker", className)}>
       {data.map((item: any, i: number) => (

@@ -1,12 +1,9 @@
 import React, { FC, SVGAttributes } from "react";
 import classNames from "classnames";
-import { Dimensions } from "../types";
+import { SharedProps } from "../types";
 import { Text, TextProps } from "..";
 
-interface Props extends SVGAttributes<SVGGElement> {
-  /** Pass Dimensions for calculations. */
-  dim: Dimensions;
-
+interface Props extends SharedProps, SVGAttributes<SVGGElement> {
   /** Pass Title Text as children shown as title. */
   children: string;
 }
@@ -14,11 +11,17 @@ interface Props extends SVGAttributes<SVGGElement> {
 export type TitleProps = Props & TextProps;
 
 export const Title: FC<TitleProps> = ({
+  data,
+  scales,
   dim,
   className,
   children,
   ...rest
 }) => {
+  if (!scales || !dim || !data) {
+    return null;
+  }
+
   return (
     <g transform={`translate(${dim.width / 2}, ${dim.margin.top})`}>
       <Text

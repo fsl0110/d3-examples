@@ -1,16 +1,14 @@
 import React, { FC, useEffect, useRef, SVGAttributes } from "react";
 import * as d3 from "d3";
 import classNames from "classnames";
-import { Dimensions } from "../types";
+import { SharedProps } from "../types";
 import { StyledAxisG, StyleProps } from "./styles";
+import { useAxis } from "../../hooks";
 
-export interface AxisProps extends StyleProps, SVGAttributes<SVGGElement> {
-  /** Pass Scales for calculations. */
-  scale: any; // TODO: Replace by generic
-
-  /** Pass Dimensions for calculations. */
-  dim: Dimensions;
-
+export interface AxisProps
+  extends StyleProps,
+    SharedProps,
+    SVGAttributes<SVGGElement> {
   /** Alignment of the Axis and Ticks. */
   align: "axisLeft" | "axisRight" | "axisBottom" | "axisTop";
 
@@ -73,8 +71,9 @@ export interface AxisProps extends StyleProps, SVGAttributes<SVGGElement> {
 }
 
 export const Axis: FC<AxisProps> = ({
+  data,
+  scales,
   dim,
-  scale,
   align,
   hideAxisLine = false,
   ticks,
@@ -99,21 +98,23 @@ export const Axis: FC<AxisProps> = ({
   className
 }) => {
   const el = useRef<SVGGElement>(null);
-
-  // @ts-ignore
-  const axis = d3[align]().scale(scale);
-
-  // api options
-  ticks && axis.ticks(ticks);
-  tickValues && axis.tickValues(tickValues);
-  tickArguments && axis.tickArguments(tickArguments);
-  tickFormat && axis.tickFormat(tickFormat);
-  (tickSize || tickSize === 0) && axis.tickSize(tickSize);
-  (tickSizeInner || tickSizeInner === 0) && axis.tickSizeInner(tickSizeInner);
-  (tickSizeOuter || tickSizeOuter === 0) && axis.tickSizeOuter(tickSizeOuter);
-  (tickPadding || tickPadding === 0) && axis.tickPadding(tickPadding);
+  const [transform, scale] = useAxis(align, scales, dim);
+  console.log(transform);
 
   useEffect(() => {
+    // @ts-ignore
+    const axis = d3[align]().scale(scale);
+
+    // api options
+    ticks && axis.ticks(ticks);
+    tickValues && axis.tickValues(tickValues);
+    tickArguments && axis.tickArguments(tickArguments);
+    tickFormat && axis.tickFormat(tickFormat);
+    (tickSize || tickSize === 0) && axis.tickSize(tickSize);
+    (tickSizeInner || tickSizeInner === 0) && axis.tickSizeInner(tickSizeInner);
+    (tickSizeOuter || tickSizeOuter === 0) && axis.tickSizeOuter(tickSizeOuter);
+    (tickPadding || tickPadding === 0) && axis.tickPadding(tickPadding);
+
     const g = d3.select(el.current).call(axis);
 
     hideAxisLine && g.select(".domain").remove();
@@ -129,6 +130,7 @@ export const Axis: FC<AxisProps> = ({
 
   return (
     <StyledAxisG
+      transform={transform}
       axisColor={axisColor}
       axisStyle={axisStyle}
       axisWidth={axisWidth}

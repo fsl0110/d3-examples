@@ -1,12 +1,9 @@
 import React, { FC, SVGAttributes } from "react";
 import classNames from "classnames";
 import { Text, TextProps } from "..";
-import { Dimensions } from "../types";
+import { SharedProps } from "../types";
 
-interface Props extends SVGAttributes<SVGGElement> {
-  /** Pass Dimensions for calculations. */
-  dim: Dimensions;
-
+interface Props extends SharedProps, SVGAttributes<SVGGElement> {
   /** Define an alignment to position the label. */
   align:
     | "verticalTop"
@@ -23,6 +20,8 @@ interface Props extends SVGAttributes<SVGGElement> {
 export type AxisLabelProps = Props & TextProps;
 
 export const AxisLabel: FC<AxisLabelProps> = ({
+  data,
+  scales,
   dim,
   align,
   letterSpacing,
@@ -30,6 +29,10 @@ export const AxisLabel: FC<AxisLabelProps> = ({
   children,
   ...rest
 }) => {
+  if (!scales || !dim || !data) {
+    return null;
+  }
+
   let transform: string;
   let textAnchor: string;
 

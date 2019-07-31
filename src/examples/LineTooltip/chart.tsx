@@ -4,7 +4,15 @@ import styled from "styled-components";
 import moment from "moment";
 import _ from "lodash";
 import { Dimensions } from "../../components/types";
-import { Axis, Line, Tooltip, Values, Cross, Marker } from "../../components";
+import {
+  Axis,
+  Line,
+  Tooltip,
+  Values,
+  Area,
+  Marker,
+  DrawZone
+} from "../../components";
 
 const StyledDiv = styled.div`
   svg {
@@ -56,36 +64,17 @@ export const Chart: FC<Props> = ({ data }) => {
     <StyledDiv>
       <svg className="chart" width={outerWidth} height={outerHight}>
         <g transform={`translate(${margin.left}, ${margin.top})`}>
-          <g transform={`translate(${margin.left}, ${margin.top})`}>
-            <Line data={newData} scales={scales} />
-            <Tooltip data={newData} scales={scales} dim={d}>
-              <Values />
-              {/*       <Marker /> */}
-              {/*     <Cross /> */}
-            </Tooltip>
-          </g>
-          <g transform={`translate(${margin.left}, ${0})`}>
-            <Axis
-              scale={y}
-              align="axisLeft"
-              dim={d}
-              tickSize={-width + 20}
-              tickStyle="2.2"
-              tickSizeOuter={0}
-              tickPadding={10}
-              hideAxisLine={true}
-            />
-          </g>
-          <g transform={`translate(${margin.left}, ${height - margin.bottom})`}>
-            <Axis
-              scale={x}
-              align="axisBottom"
-              dim={d}
-              axisWidth="6"
-              tickSize={0}
-              tickPadding={15}
-            />
-          </g>
+          <DrawZone>
+            <Line>
+              <Area />
+              <Marker />
+              <Tooltip>
+                <Values />
+              </Tooltip>
+            </Line>
+          </DrawZone>
+          <Axis align="axisLeft" />
+          <Axis align="axisBottom" />
         </g>
       </svg>
     </StyledDiv>

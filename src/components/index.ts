@@ -11,3 +11,4 @@ export * from "./marker";
 export * from "./title";
 export * from "./tooltip";
 export * from "./values";
+export * from "./drawZone";

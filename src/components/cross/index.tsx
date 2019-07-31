@@ -1,17 +1,8 @@
 import React, { FC, SVGAttributes } from "react";
 import classNames from "classnames";
-import { Dimensions } from "../types";
+import { Dimensions, SharedProps } from "../types";
 
-export interface CrossProps extends SVGAttributes<SVGGElement> {
-  /** Pass Data for calculations. */
-  data?: any; // TODO: Replace by generic
-
-  /** Pass Scales for calculations. */
-  scales?: any; // TODO: Replace by generic
-
-  /** Pass Dimesions for calculations */
-  dim?: Dimensions;
-
+export interface CrossProps extends SharedProps, SVGAttributes<SVGGElement> {
   /**
    * Wether to hide Cross-Lines e.g. in order to appear only on mouseover.
    * @default false
@@ -146,6 +137,10 @@ export const Cross: FC<CrossProps> = ({
   crossY,
   className
 }) => {
+  if (!scales || !dim || !data) {
+    return null;
+  }
+
   const setXCross = (
     item: any,
     full: boolean,

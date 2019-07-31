@@ -61,7 +61,7 @@ export const Chart: FC<Props> = ({ data }) => {
           </g>
           <g transform={`translate(${margin.left}, ${0})`}>
             <Axis
-              scale={y}
+              scales={y}
               align="axisLeft"
               dim={d}
               tickSize={-width + 20}
@@ -75,7 +75,7 @@ export const Chart: FC<Props> = ({ data }) => {
           </g>
           <g transform={`translate(${margin.left}, ${height - margin.bottom})`}>
             <Axis
-              scale={x}
+              scales={x}
               align="axisBottom"
               dim={d}
               tickSizeInner={-height + 20}

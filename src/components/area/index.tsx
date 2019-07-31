@@ -1,18 +1,9 @@
 import React, { FC, SVGAttributes } from "react";
 import classNames from "classnames";
 import * as d3 from "d3";
-import { Data, Dimensions } from "../types";
+import { Data, SharedProps } from "../types";
 
-export interface AreaProps extends SVGAttributes<SVGPathElement> {
-  /** Pass Data for calculations. */
-  data: any; // TODO: Replace by generic
-
-  /** Pass Scales for calculations. */
-  scales: { x: any; y: any }; // TODO: Replace by generic
-
-  /** Pass Dimensions for calculations. */
-  dim: Dimensions;
-
+export interface AreaProps extends SharedProps, SVGAttributes<SVGPathElement> {
   /** Define a background color for the area.
    * @efault aqua
    */
@@ -61,6 +52,10 @@ export const Area: FC<AreaProps> = ({
   strokeWidth = 0,
   className
 }) => {
+  if (!scales || !dim || !data) {
+    return null;
+  }
+
   const area = d3
     .area()
     .x((d: Data) => scales.x(d[0]))
@@ -72,7 +67,7 @@ export const Area: FC<AreaProps> = ({
     <path
       className={classNames("area", className)}
       fill={color}
-      fill-opacity={opacity}
+      fillOpacity={opacity}
       stroke={strokeColor}
       strokeWidth={strokeWidth}
       d={area(data) || undefined}
