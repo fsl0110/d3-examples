@@ -33,7 +33,8 @@ export interface StyleProps {
   letterSpacing?: string;
 }
 
-export const StyledText = styled.text<StyleProps>`
+export const StyledDiv = styled.div<StyleProps>`
+  color: ${props => props.color};
   font-size: ${props => (props.size ? props.size + "px" : "")};
   font-family: ${props => props.family || "sans-serif"};
   font-weight: ${props => props.weight};

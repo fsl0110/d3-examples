@@ -6,12 +6,17 @@ import _ from "lodash";
 import { Dimensions } from "../../components/types";
 import {
   Axis,
+  AxisLabel,
   Line,
   Tooltip,
   Values,
   Area,
   Marker,
-  DrawZone
+  DrawZone,
+  Title,
+  Cross,
+  Legend,
+  Legends
 } from "../../components";
 
 const StyledDiv = styled.div`
@@ -62,21 +67,28 @@ export const Chart: FC<Props> = ({ data }) => {
 
   return (
     <StyledDiv>
-      <svg className="chart" width={outerWidth} height={outerHight}>
-        <g transform={`translate(${margin.left}, ${margin.top})`}>
-          <DrawZone>
-            <Line>
-              <Area />
+      <Chart data="newData">
+        <Title>Chart Title</Title>
+        <DrawZone>
+          <Line>
+            <Area />
+            <Tooltip>
+              <Values />
               <Marker />
-              <Tooltip>
-                <Values />
-              </Tooltip>
-            </Line>
-          </DrawZone>
-          <Axis align="axisLeft" />
-          <Axis align="axisBottom" />
-        </g>
-      </svg>
+              <Cross />
+            </Tooltip>
+          </Line>
+        </DrawZone>
+        <Axis align="axisLeft">
+          <AxisLabel align="verticalTop">Label Y</AxisLabel>
+        </Axis>
+        <Axis align="axisBottom">
+          <AxisLabel align="horizontalRight">Label X</AxisLabel>
+        </Axis>
+        <Legends>
+          <Legend>Line 1</Legend>
+        </Legends>
+      </Chart>
     </StyledDiv>
   );
 };

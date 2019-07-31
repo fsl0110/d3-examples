@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef, SVGAttributes } from "react";
+import React, { FC, useEffect, useRef, SVGAttributes, ReactNode } from "react";
 import * as d3 from "d3";
 import classNames from "classnames";
 import { SharedProps } from "../types";
@@ -66,8 +66,7 @@ export interface AxisProps
    */
   tickTextPosition?: [number, number];
 
-  /** No Childrens allowed */
-  children?: never;
+  children?: ReactNode;
 }
 
 export const Axis: FC<AxisProps> = ({
