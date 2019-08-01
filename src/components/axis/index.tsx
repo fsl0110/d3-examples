@@ -10,11 +10,11 @@ import * as d3 from "d3";
 import classNames from "classnames";
 import { StyledAxisG, StyleProps } from "./styles";
 import { useAxis } from "../../hooks";
-import { initialState, chartReducer } from "../../store";
+import { initialState, chartReducer, AxisAlign } from "../../store";
 
 export interface AxisProps extends StyleProps, SVGAttributes<SVGGElement> {
   /** Alignment of the Axis and Ticks. */
-  align: "axisLeft" | "axisRight" | "axisBottom" | "axisTop";
+  align: AxisAlign;
 
   /** Wether to show the axis line.
    * @default false
@@ -128,7 +128,7 @@ export const Axis: FC<AxisProps> = ({
         .attr("dy", tickTextPosition[1]);
 
     d3.select(".axis .tick:nth-child(1) text").remove();
-  }, []);
+  });
 
   return (
     <StyledAxisG

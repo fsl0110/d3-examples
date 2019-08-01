@@ -13,6 +13,7 @@ export function useAxis(align: AxisAlign, store: AppState) {
       transform = `translate(${store.margin.left}, ${store.dimension.height -
         store.margin.bottom})`;
       currentScale = store.scale.x;
+      break;
     case "axisRight":
       // TODO: add position
       transform = `translate(${0}, ${0})`;

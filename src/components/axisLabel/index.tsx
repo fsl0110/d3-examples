@@ -1,18 +1,12 @@
 import React, { FC, SVGAttributes, useReducer } from "react";
 import classNames from "classnames";
 import { Text, TextProps } from "..";
-import { initialState, chartReducer } from "../../store";
+import { initialState, chartReducer, AxisLabelAlign } from "../../store";
 import { useAxisLabel } from "../../hooks";
 
 interface Props extends SVGAttributes<SVGGElement> {
   /** Define an alignment to position the label. */
-  align:
-    | "verticalTop"
-    | "verticalCenter"
-    | "verticalBottom"
-    | "horizontalLeft"
-    | "horizontalCenter"
-    | "horizontalRight";
+  align: AxisLabelAlign;
 
   /** Define a text as children shown as label for an axis. */
   children: string;
