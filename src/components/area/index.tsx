@@ -1,8 +1,7 @@
-import React, { FC, SVGAttributes } from "react";
+import React, { FC, SVGAttributes, useReducer } from "react";
 import classNames from "classnames";
 import * as d3 from "d3";
-import { useSelector } from "react-redux";
-import { AppState, Data, Dimension, Margin } from "../../store/initialState";
+import { initialState, chartReducer, Data } from "../../store";
 
 export interface AreaProps extends SVGAttributes<SVGPathElement> {
   /** Define a background color for the area.
@@ -48,20 +47,16 @@ export const Area: FC<AreaProps> = ({
   opacity = 0.3,
   strokeColor = "aqua",
   strokeWidth = 0,
-  className
+  className,
+  ...rest
 }) => {
-  const data = useSelector<AppState, Data>(state => state.data.CHART);
-  const scales = useSelector<AppState, any>(state => state.scales.CHART);
-  const dimension = useSelector<AppState, Dimension>(
-    state => state.dimension.CHART
-  );
-  const margin = useSelector<AppState, Margin>(state => state.margin.CHART);
+  const [store] = useReducer(chartReducer, initialState);
 
   const area = d3
     .area()
-    .x((d: Data) => scales.x(d[0]))
-    .y0(dimension.height - margin.top - margin.bottom)
-    .y1((d: Data) => scales.y(d[1]))
+    .x((d: Data) => store.scale.x(d[0]))
+    .y0(store.dimension.height - store.margin.top - store.margin.bottom)
+    .y1((d: Data) => store.scale.y(d[1]))
     .curve(d3[type]);
 
   return (
@@ -71,7 +66,8 @@ export const Area: FC<AreaProps> = ({
       fillOpacity={opacity}
       stroke={strokeColor}
       strokeWidth={strokeWidth}
-      d={area(data) || undefined}
+      d={area(store.data) || undefined}
+      {...rest}
     />
   );
 };

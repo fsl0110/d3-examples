@@ -1,8 +1,8 @@
-import React, { FC, SVGAttributes } from "react";
+import React, { FC, SVGAttributes, useReducer } from "react";
 import classNames from "classnames";
-import { Dimensions, SharedProps } from "../types";
+import { initialState, chartReducer, Item } from "../../store";
 
-export interface CrossProps extends SharedProps, SVGAttributes<SVGGElement> {
+export interface CrossProps extends SVGAttributes<SVGGElement> {
   /**
    * Wether to hide Cross-Lines e.g. in order to appear only on mouseover.
    * @default false
@@ -114,9 +114,6 @@ export interface CrossProps extends SharedProps, SVGAttributes<SVGGElement> {
 }
 
 export const Cross: FC<CrossProps> = ({
-  scales,
-  data,
-  dim,
   hide = false,
   hideX,
   hideY,
@@ -132,81 +129,74 @@ export const Cross: FC<CrossProps> = ({
   dash = 3,
   dashX,
   dashY,
-  cross,
+  cross = 0,
   crossX,
   crossY,
-  className
+  className,
+  ...rest
 }) => {
-  if (!scales || !dim || !data) {
-    return null;
-  }
+  const [store] = useReducer(chartReducer, initialState);
 
   const setXCross = (
-    item: any,
+    item: Item,
     full: boolean,
     fullX: boolean,
-    cross: number | undefined,
-    crossX: number | undefined,
-    dim: Dimensions
+    cross: number,
+    crossX: number | undefined
   ) => {
     if (cross || crossX) {
-      return scales.y(item[1]) + 1 - (crossX! || cross!);
+      return store.scale.y(item[1]) + 1 - (crossX! || cross!);
     }
 
     if (full || fullX) {
-      return -dim.margin.top;
+      return -store.margin.top;
     }
 
-    return scales.y(item[1]) + 1;
+    return store.scale.y(item[1]) + 1;
   };
 
   const setYCross = (
-    item: any,
+    item: Item,
     full: boolean,
     fullY: boolean,
-    cross: number | undefined,
-    crossY: number | undefined,
-    dim: Dimensions
+    cross: number,
+    crossY: number | undefined
   ) => {
     if (cross || crossY) {
-      return scales.x(item[0]) + (crossY || cross);
+      return store.scale.x(item[0]) + (crossY || cross);
     }
 
     if (full || fullY) {
-      return dim.width - dim.margin.right;
+      return store.dimension.width - store.margin.right;
     }
 
-    return scales.x(item[0]);
+    return store.scale.x(item[0]);
   };
 
-  if (!dim) {
-    return null;
-  }
-
   return (
-    <g className={classNames("cross", className)}>
-      {data.map((item: any, i: number) => (
+    <g className={classNames("cross", className)} {...rest}>
+      {store.data.map((item: Item, i: number) => (
         <g className="cross-lines" key={i}>
           {/** The vertical Cross-Line */}
           <line
-            className="x-cross-line"
+            className="cross-line-x"
             opacity={hideX || hide ? 0 : 1}
-            x1={scales.x(item[0]) + 1}
-            x2={scales.x(item[0]) + 1}
-            y1={dim.height - dim.margin.top - dim.margin.bottom}
-            y2={setXCross(item, full, fullX, cross, crossX, dim)}
+            x1={store.scale.x(item[0]) + 1}
+            x2={store.scale.x(item[0]) + 1}
+            y1={store.dimension.height - store.margin.top - store.margin.bottom}
+            y2={setXCross(item, full, fullX, cross, crossX)}
             stroke={colorX || color}
             strokeWidth={widthX || width}
             strokeDasharray={dashX || dash}
           />
           {/** The horizontal Cross-Line */}
           <line
-            className="y-cross-line"
+            className="cross-line-y"
             opacity={hideY || hide ? 0 : 1}
             x1={0}
-            x2={setYCross(item, full, fullY, cross, crossY, dim)}
-            y1={scales.y(item[1])}
-            y2={scales.y(item[1])}
+            x2={setYCross(item, full, fullY, cross, crossY)}
+            y1={store.scale.y(item[1])}
+            y2={store.scale.y(item[1])}
             stroke={colorY || color}
             strokeWidth={widthY || width}
             strokeDasharray={dashY || dash}

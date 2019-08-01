@@ -1,9 +1,10 @@
-import React, { FC, SVGAttributes } from "react";
+import React, { FC, SVGAttributes, useReducer } from "react";
 import classNames from "classnames";
 import { Text, TextProps } from "..";
-import { SharedProps } from "../types";
+import { initialState, chartReducer } from "../../store";
+import { useAxisLabel } from "../../hooks";
 
-interface Props extends SharedProps, SVGAttributes<SVGGElement> {
+interface Props extends SVGAttributes<SVGGElement> {
   /** Define an alignment to position the label. */
   align:
     | "verticalTop"
@@ -20,59 +21,24 @@ interface Props extends SharedProps, SVGAttributes<SVGGElement> {
 export type AxisLabelProps = Props & TextProps;
 
 export const AxisLabel: FC<AxisLabelProps> = ({
-  data,
-  scales,
-  dim,
   align,
   letterSpacing,
   className,
   children,
   ...rest
 }) => {
-  if (!scales || !dim || !data) {
-    return null;
-  }
-
-  let transform: string;
-  let textAnchor: string;
-
-  switch (align) {
-    case "verticalTop":
-      transform = `translate(${-60}, ${0}) rotate(-90)`;
-      textAnchor = "end";
-      break;
-    case "horizontalRight":
-      transform = `translate(${dim.width - dim.margin.right}, ${40})`;
-      textAnchor = "end";
-      break;
-    case "verticalCenter":
-      transform = `translate(${-60}, ${dim.height / 2}) rotate(-90)`;
-      textAnchor = "middle";
-      break;
-    case "horizontalCenter":
-      transform = `translate(${dim.width / 2}, ${40})`;
-      textAnchor = "middle";
-      break;
-    case "verticalBottom":
-      transform = `translate(${-60}, ${dim.height -
-        dim.margin.bottom}) rotate(-90)`;
-      textAnchor = "start";
-      break;
-    case "horizontalLeft":
-      transform = `translate(${0}, ${40})`;
-      textAnchor = "start";
-      break;
-    default:
-      transform = "";
-      textAnchor = "";
-  }
+  const [store] = useReducer(chartReducer, initialState);
+  const [transform, textAnchor] = useAxisLabel(
+    align,
+    store.dimension,
+    store.margin
+  );
 
   return (
-    <g transform={transform}>
+    <g transform={transform} {...rest}>
       <Text
         className={classNames("axis-label", className)}
         textAnchor={textAnchor}
-        {...rest}
       >
         {children}
       </Text>

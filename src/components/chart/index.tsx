@@ -1,28 +1,76 @@
-import React, { FC, SVGAttributes, ReactNode, useEffect } from "react";
-import { Provider } from "react-redux";
-import { useDispatch } from "react-redux";
-import { StyledDiv, StyleProps } from "./styles";
-import store from "../../store";
+import React, {
+  FC,
+  HTMLAttributes,
+  ReactNode,
+  useEffect,
+  useReducer
+} from "react";
+import {
+  initialState,
+  chartReducer,
+  Dimension,
+  Margin,
+  Data,
+  Scale
+} from "../../store";
 
-interface Props extends SVGAttributes<HTMLDivElement> {
-  // optional option to pass datafetching mechanism
-  // optional interface for more config from outside
-  data?: any;
-  width?: number;
-  height?: number;
-  margin?: [number, number, number, number];
+import { StyledDiv, StyleProps } from "./styles";
+
+interface ChartProps extends StyleProps, HTMLAttributes<HTMLDivElement> {
+  /** Define scales for your Chart */
+  scale: Scale;
+
+  /** Pass in Data from outside */
+  data?: Data;
+
+  /** Override default dimensions with your individual dimensions */
+  dimension?: Dimension;
+
+  /** Override default margins with your individual margins */
+  margin?: Margin;
+  /** Wether the error indicator should be shown. */
   hasError?: boolean;
+
+  /** Wether the loading indicator should be shown. */
   isLoading?: boolean;
-  xScale?: "scaleLinear" | "scaleTime" | "scaleOrdinal";
-  yScale?: "scaleLinear" | "scaleTime" | "scaleOrdinal";
-  scale?: string;
-  children?: ReactNode | ReactNode[];
+
+  /** Children is mandantory */
+  children: ReactNode | ReactNode[];
 }
 
-export type ChartProps = Props & StyleProps;
+export const Chart: FC<ChartProps> = ({
+  data,
+  dimension,
+  margin,
+  scale,
+  children,
+  ...rest
+}) => {
+  const [store, dispatch] = useReducer(chartReducer, initialState);
 
-export const Chart: FC<ChartProps> = () => {
-  console.log("chart component");
+  useEffect(() => {
+    data && dispatch({ type: "SET_DATA", payload: data });
+  }, [data]);
 
-  return <div />;
+  useEffect(() => {
+    dimension && dispatch({ type: "SET_DIMENSION", dimension });
+  }, [dimension]);
+
+  useEffect(() => {
+    margin && dispatch({ type: "SET_MARGIN", margin });
+  }, [margin]);
+
+  useEffect(() => {
+    scale && dispatch({ type: "SET_SCALE", scale });
+  }, [scale]);
+
+  return (
+    <StyledDiv {...rest}>
+      <svg width={store.dimension.width} height={store.dimension.height}>
+        <g transform={`translate(${store.margin.left}, ${store.margin.top})`}>
+          {children}
+        </g>
+      </svg>
+    </StyledDiv>
+  );
 };

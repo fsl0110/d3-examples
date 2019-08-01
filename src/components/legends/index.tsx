@@ -1,9 +1,9 @@
-import React, { FC, SVGAttributes, ReactNode } from "react";
+import React, { FC, SVGAttributes, ReactNode, useReducer } from "react";
 import classNames from "classnames";
+import { initialState, chartReducer } from "../../store";
 import { StyledDiv } from "./styles";
-import { SharedProps } from "../types";
 
-export interface LegendsProps extends SharedProps, SVGAttributes<SVGGElement> {
+export interface LegendsProps extends SVGAttributes<SVGGElement> {
   /** Define the position of the legend. */
   position?: "top" | "left" | "bottom" | "right";
 
@@ -17,12 +17,14 @@ export interface LegendsProps extends SharedProps, SVGAttributes<SVGGElement> {
    */
   width?: number;
 
-  children?: ReactNode | ReactNode[];
+  children: ReactNode | ReactNode[];
 }
 
-export const Legends: FC<LegendsProps> = ({ className, children }) => {
+export const Legends: FC<LegendsProps> = ({ className, children, ...rest }) => {
+  const [store] = useReducer(chartReducer, initialState);
+
   return (
-    <g transform={`translate(${20}, ${250})`}>
+    <g transform={`translate(${0}, ${store.dimension.height})`} {...rest}>
       <foreignObject>
         <StyledDiv className={classNames("legends", className)}>
           {children}

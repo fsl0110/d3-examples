@@ -1,8 +1,8 @@
-import React, { FC, SVGAttributes, ReactNode } from "react";
+import React, { FC, SVGAttributes, ReactNode, useReducer } from "react";
 import * as d3 from "d3";
-import { Data, SharedProps } from "../types";
+import { initialState, chartReducer, Data } from "../../store";
 
-export interface LineProps extends SharedProps, SVGAttributes<SVGGElement> {
+export interface LineProps extends SVGAttributes<SVGGElement> {
   /**
    * Define a color for the line
    * @default aqua
@@ -40,43 +40,32 @@ export interface LineProps extends SharedProps, SVGAttributes<SVGGElement> {
 }
 
 export const Line: FC<LineProps> = ({
-  data,
-  scales,
-  dim,
   color = "aqua",
   dash,
   width = 2,
   lineType = "curveMonotoneX",
-  children
+  children,
+  ...rest
 }) => {
-  if (!scales || !dim || !data) {
-    return null;
-  }
+  const [store] = useReducer(chartReducer, initialState);
 
   const lineGenerator = d3
     .line()
-    .x((d: Data) => scales.x(d[0]))
-    .y((d: Data) => scales.y(d[1]))
+    .x((d: Data) => store.scale.x(d[0]))
+    .y((d: Data) => store.scale.y(d[1]))
     .curve(d3[lineType]);
 
   return (
-    <g>
+    <g {...rest}>
       <path
         className="line"
-        d={lineGenerator(data) || ""}
+        d={lineGenerator(store.data) || ""}
         fill="none"
         stroke={color}
         strokeWidth={width}
         strokeDasharray={dash}
       />
-      {children &&
-        React.Children.map(children, child =>
-          React.cloneElement(child as never, {
-            data,
-            scales,
-            dim
-          })
-        )}
+      {children}
     </g>
   );
 };

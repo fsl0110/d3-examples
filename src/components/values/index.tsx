@@ -1,28 +1,24 @@
-import React, { FC, SVGAttributes } from "react";
+import React, { FC, SVGAttributes, useReducer } from "react";
 import classNames from "classnames";
-import { Data, SharedProps } from "../types";
+import { initialState, chartReducer, Data } from "../../store";
 
-interface Props extends SharedProps, SVGAttributes<SVGGElement> {
+interface ValuesProps extends SVGAttributes<SVGGElement> {
   /** No Childrens allowed */
   children?: never;
 }
 
-export type ValuesProps = Props;
-
-export const Values: FC<ValuesProps> = ({ data, scales, dim, className }) => {
-  if (!scales || !dim || !data) {
-    return null;
-  }
+export const Values: FC<ValuesProps> = ({ className }) => {
+  const [store] = useReducer(chartReducer, initialState);
 
   return (
     <g className={classNames("values", className)}>
-      {data.map((item: Data, i: number) => {
+      {store.data.map((item: Data, i: number) => {
         return (
           <text
             className="value"
             key={i}
-            x={scales.x(item[0])}
-            y={scales.y(item[1]) - 15}
+            x={store.scale.x(item[0])}
+            y={store.scale.y(item[1]) - 15}
             textAnchor="middle"
             fill="blue"
           >

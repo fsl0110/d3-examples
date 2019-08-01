@@ -1,29 +1,23 @@
-import React, { FC, SVGAttributes } from "react";
+import React, { FC, SVGAttributes, useReducer } from "react";
 import classNames from "classnames";
-import { SharedProps } from "../types";
+import { initialState, chartReducer } from "../../store";
 import { Text, TextProps } from "..";
 
-interface Props extends SharedProps, SVGAttributes<SVGGElement> {
+interface Props extends SVGAttributes<SVGGElement> {
   /** Pass Title Text as children shown as title. */
   children: string;
 }
 
 export type TitleProps = Props & TextProps;
 
-export const Title: FC<TitleProps> = ({
-  data,
-  scales,
-  dim,
-  className,
-  children,
-  ...rest
-}) => {
-  if (!scales || !dim || !data) {
-    return null;
-  }
+export const Title: FC<TitleProps> = ({ className, children, ...rest }) => {
+  const [store] = useReducer(chartReducer, initialState);
 
   return (
-    <g transform={`translate(${dim.width / 2}, ${dim.margin.top})`}>
+    <g
+      transform={`translate(${store.dimension.width / 2}, ${store.margin.top})`}
+      {...rest}
+    >
       <Text
         className={classNames("chart-title", className)}
         text-anchor="middle"

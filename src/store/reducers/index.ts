@@ -1,36 +1,40 @@
 import produce from "immer";
 import { Reducer } from "redux";
-import { initialState, AppState } from "../initialState";
+import { initialState, AppState } from "..";
 import {
   ActionTypes,
   SET_LOADING,
-  SET_DATA,
   SET_ERROR,
+  SET_DATA,
+  SET_SCALE,
   SET_DIMENSION,
   SET_MARGIN,
   SET_TOOLTIP
 } from "../actions";
 
-export const reducer: Reducer<AppState, ActionTypes> = produce(
+export const chartReducer: Reducer<AppState, ActionTypes> = produce(
   (draft: AppState = initialState, action: ActionTypes) => {
     switch (action.type) {
       case SET_LOADING:
-        draft.isLoading[action.key] = action.isLoading;
-        return draft;
-      case SET_DATA:
-        draft.data[action.key] = action.payload;
+        draft.isLoading = action.isLoading;
         return draft;
       case SET_ERROR:
-        draft.hasError[action.key] = action.hasError;
+        draft.hasError = action.hasError;
+        return draft;
+      case SET_DATA:
+        draft.data = action.payload;
+        return draft;
+      case SET_SCALE:
+        draft.scale = action.scale;
         return draft;
       case SET_DIMENSION:
-        draft.dimension[action.key] = action.dimension;
+        draft.dimension = action.dimension;
         return draft;
       case SET_MARGIN:
-        draft.margin[action.key] = action.margin;
+        draft.margin = action.margin;
         return draft;
       case SET_TOOLTIP:
-        draft.tooltip[action.key] = action.value;
+        draft.tooltip = action.value;
         return draft;
       default:
         return draft;

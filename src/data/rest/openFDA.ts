@@ -35,7 +35,13 @@ export const openFDA = {
 
       const countedByYears = Object.entries(groupedByYears).map(
         (entry: any) => {
-          return [entry[0], _.sumBy(entry[1], (item: any) => item.count)];
+          return [
+            entry[0],
+            _.sumBy(
+              entry[1],
+              (item: { time: string; count: number }) => item.count
+            )
+          ];
         }
       );
 

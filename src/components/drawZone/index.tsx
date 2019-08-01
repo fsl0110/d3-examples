@@ -1,23 +1,19 @@
-import React, { FC, SVGAttributes, ReactNode, ReactElement } from "react";
-import { SharedProps } from "../types";
+import React, { FC, SVGAttributes, ReactNode, useReducer } from "react";
+import { initialState, chartReducer } from "../../store";
 
-export interface DrawZoneProps extends SharedProps, SVGAttributes<SVGGElement> {
+export interface DrawZoneProps extends SVGAttributes<SVGGElement> {
   children: ReactNode | ReactNode[];
 }
 
-export const DrawZone: FC<DrawZoneProps> = ({
-  data,
-  scales,
-  dim,
-  children
-}) => {
-  return children && dim ? (
-    <g transform={`translate(${dim.margin.left}, ${dim.margin.top})`}>
-      {React.Children.map(children, child =>
-        React.cloneElement(child as never, { data, scales, dim })
-      )}
+export const DrawZone: FC<DrawZoneProps> = ({ children, ...rest }) => {
+  const [store] = useReducer(chartReducer, initialState);
+
+  return (
+    <g
+      transform={`translate(${store.margin.left}, ${store.margin.top})`}
+      {...rest}
+    >
+      {children}
     </g>
-  ) : (
-    <g />
   );
 };

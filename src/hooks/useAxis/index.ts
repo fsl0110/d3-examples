@@ -1,33 +1,28 @@
-import { useEffect, useState } from "react";
-import { Dimensions } from "../../components/types";
+import { AppState, AxisAlign } from "../../store";
 
-export function useAxis(align: any, scales: any, dim: Dimensions | undefined) {
-  if (!scales || !dim) {
-    return ["", []];
-  }
-
+export function useAxis(align: AxisAlign, store: AppState) {
   let transform: string = "";
-  let scale: any;
+  let currentScale: any;
 
   switch (align) {
     case "axisLeft":
-      transform = `translate(${dim.margin.left}, ${0})`;
-      scale = scales.y;
+      transform = `translate(${store.margin.left}, ${0})`;
+      currentScale = store.scale.y;
       break;
     case "axisBottom":
-      transform = `translate(${dim.margin.left}, ${dim.height -
-        dim.margin.bottom})`;
-      scale = scales.x;
+      transform = `translate(${store.margin.left}, ${store.dimension.height -
+        store.margin.bottom})`;
+      currentScale = store.scale.x;
     case "axisRight":
       // TODO: add position
       transform = `translate(${0}, ${0})`;
-      scale = scales.y;
+      currentScale = store.scale.y;
       break;
     case "axisTop":
       // TODO: add position
       transform = `translate(${0}, ${0})`;
-      scale = scales.x;
+      currentScale = store.scale.x;
       break;
   }
-  return [transform, scale];
+  return [transform, currentScale];
 }

@@ -14,7 +14,6 @@ export const Text: FC<TextProps> = ({
   size,
   weight,
   letterSpacing,
-  textAnchor,
   className,
   children
 }) => {
@@ -27,8 +26,6 @@ export const Text: FC<TextProps> = ({
         size={size}
         weight={weight}
         letterSpacing={letterSpacing}
-        /*   textAnchor={textAnchor} */
-        /*     fill={color} */
       >
         {children}
       </StyledDiv>

@@ -1,14 +1,18 @@
-import React, { FC, useEffect, useRef, SVGAttributes, ReactNode } from "react";
+import React, {
+  FC,
+  useEffect,
+  useRef,
+  SVGAttributes,
+  ReactNode,
+  useReducer
+} from "react";
 import * as d3 from "d3";
 import classNames from "classnames";
-import { SharedProps } from "../types";
 import { StyledAxisG, StyleProps } from "./styles";
 import { useAxis } from "../../hooks";
+import { initialState, chartReducer } from "../../store";
 
-export interface AxisProps
-  extends StyleProps,
-    SharedProps,
-    SVGAttributes<SVGGElement> {
+export interface AxisProps extends StyleProps, SVGAttributes<SVGGElement> {
   /** Alignment of the Axis and Ticks. */
   align: "axisLeft" | "axisRight" | "axisBottom" | "axisTop";
 
@@ -27,19 +31,19 @@ export interface AxisProps
   /** Define inividual tick values shown on the axis.
    * @default undefined
    */
-  tickValues?: any;
+  tickValues?: [];
 
   // TODO: check this out or remove it.
   /** Define inividual tick arguments.
    * @default undefined
    */
-  tickArguments?: any;
+  tickArguments?: [];
 
   // TODO: test this.
   /** Define inividual tick format.
    * @default undefined
    */
-  tickFormat?: any;
+  tickFormat?: Function;
 
   /** Define a size for the ticks.
    * @default undefined
@@ -66,13 +70,11 @@ export interface AxisProps
    */
   tickTextPosition?: [number, number];
 
+  /** children are optional for passing AxisLabels */
   children?: ReactNode;
 }
 
 export const Axis: FC<AxisProps> = ({
-  data,
-  scales,
-  dim,
   align,
   hideAxisLine = false,
   ticks,
@@ -94,11 +96,12 @@ export const Axis: FC<AxisProps> = ({
   tickTextColor = "#b8b8b8",
   tickTextSize = 14,
   tickTextFamily = "inherit",
-  className
+  className,
+  ...rest
 }) => {
   const el = useRef<SVGGElement>(null);
-  const [transform, scale] = useAxis(align, scales, dim);
-  console.log(transform);
+  const [store] = useReducer(chartReducer, initialState);
+  const [transform, scale] = useAxis(align, store);
 
   useEffect(() => {
     // @ts-ignore
@@ -141,6 +144,7 @@ export const Axis: FC<AxisProps> = ({
       tickTextFamily={tickTextFamily}
       className={classNames("axis", className)}
       ref={el}
+      {...rest}
     />
   );
 };

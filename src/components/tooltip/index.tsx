@@ -1,47 +1,42 @@
-import React, { FC, useState, SVGAttributes, ReactNode } from "react";
+import React, { FC, useState, SVGAttributes, useReducer } from "react";
 import * as d3 from "d3";
-import { SharedProps } from "../types";
+import { initialState, chartReducer, Data } from "../../store";
+import { Text } from "../../components";
 
-interface TooltipPorps extends SharedProps, SVGAttributes<SVGGElement> {
-  children: ReactNode | ReactNode[];
+interface TooltipProps extends SVGAttributes<SVGGElement> {
+  children: string;
 }
 
-export const Tooltip: FC<TooltipPorps> = ({ data, scales, dim, children }) => {
+export const Tooltip: FC<TooltipProps> = ({ children, ...rest }) => {
   /** CurrentData is one DataSet of the data array. */
   const [currentData, setCurrentData] = useState([]);
+  const [store] = useReducer(chartReducer, initialState);
 
-  if (!scales || !dim || !data) {
-    return null;
-  }
-
-  let bisectMouseValue = d3.bisector((d: any) => d[0]).left;
+  let bisectMouseValue = d3.bisector((d: Data) => d[0]).left;
 
   return (
-    <g>
+    <g {...rest}>
       <rect
-        width={dim.width}
-        height={dim.height}
+        width={store.dimension.width}
+        height={store.dimension.height}
         opacity="0"
         onMouseMove={e => {
-          const mouseValue = scales.x.invert(e.nativeEvent.offsetX);
-          const i = bisectMouseValue(data, mouseValue, 1, data.length);
-          if (data[i - 1] !== data) {
-            setCurrentData(data[i - 1]);
+          const mouseValue = store.scale.x.invert(e.nativeEvent.offsetX);
+          const i = bisectMouseValue(
+            store.data,
+            mouseValue,
+            1,
+            store.data.length
+          );
+          if (store.data[i - 1] !== store.data) {
+            setCurrentData(store.data[i - 1]);
           }
         }}
         onMouseOut={() => {
           setCurrentData([]);
         }}
       />
-      {currentData.length &&
-        children &&
-        React.Children.map(children, child =>
-          React.cloneElement(child as never, {
-            data: [currentData],
-            scales,
-            dim
-          })
-        )}
+      {currentData.length && <Text>{children}</Text>}
     </g>
   );
 };

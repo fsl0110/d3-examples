@@ -2,8 +2,8 @@ import React, { FC } from "react";
 import * as d3 from "d3";
 import styled from "styled-components";
 
-import { Dimensions } from "../../components/types";
-import { Chart } from "../../components";
+import { Dimension, Data } from "../../store";
+import { Chart, DrawZone, Line } from "../../components";
 
 const StyledDiv = styled.div`
   svg {
@@ -23,15 +23,14 @@ export const ChartStart: FC<Props> = ({ data }) => {
   const width = outerWidth - margin.left * 2 - margin.right;
   const height = outerHight - margin.top - margin.bottom;
 
-  const d: Dimensions = {
+  const d: Dimension = {
     width,
-    height,
-    margin
+    height
   };
 
-  const xMin = Math.min(...data.map((d: any) => d[0]));
-  const xMax = Math.max(...data.map((d: any) => d[0]));
-  const yMax = Math.max(...data.map((d: any) => d[1]));
+  const xMin = Math.min(...data.map((d: Data) => d[0]));
+  const xMax = Math.max(...data.map((d: Data) => d[0]));
+  const yMax = Math.max(...data.map((d: Data) => d[1]));
 
   const y = d3
     .scaleLinear()
@@ -43,13 +42,15 @@ export const ChartStart: FC<Props> = ({ data }) => {
     .domain([xMin, xMax])
     .range([0, width - margin.right]);
 
-  const scales = { x, y };
-
   console.log("chart page", data);
 
   return (
     <StyledDiv>
-      <Chart data={data} />
+      <Chart data={data} scale={{ x, y }}>
+        <DrawZone>
+          <Line />
+        </DrawZone>
+      </Chart>
     </StyledDiv>
   );
 };

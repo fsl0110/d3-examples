@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { useFetch } from "../../hooks";
 import { AxiosPromise } from "axios";
-import { Data } from "../types";
+import { Data } from "../../store";
 
 export interface Props {
   loadingIndicator?: JSX.Element;
