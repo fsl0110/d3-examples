@@ -1,8 +1,7 @@
 import React, { FC } from "react";
 import * as d3 from "d3";
 import styled from "styled-components";
-import moment from "moment";
-import _ from "lodash";
+
 import { Dimensions } from "../../components/types";
 import {
   Axis,
@@ -12,11 +11,9 @@ import {
   Values,
   Area,
   Marker,
-  DrawZone,
   Title,
   Cross,
-  Legend,
-  Legends
+  Legend
 } from "../../components";
 
 const StyledDiv = styled.div`
@@ -30,13 +27,7 @@ interface Props {
 
 export const Chart: FC<Props> = ({ data }) => {
   /* const [ref, size] = useComponentSize(); */
-  const groupedByYear = _.groupBy(data, (item: any) =>
-    moment(item.x, "YYYYMMDD").format("YYYY")
-  );
-  const countedByYears = Object.entries(groupedByYear).map((year: any) => {
-    return [year[0], _.sumBy(year[1], (item: any) => item.y)];
-  });
-  const newData = countedByYears;
+
   const outerHight = 500;
   const outerWidth = 800;
   const margin = { top: 20, right: 20, bottom: 20, left: 40 };
@@ -49,9 +40,9 @@ export const Chart: FC<Props> = ({ data }) => {
     margin
   };
 
-  const xMin = Math.min(...newData.map((d: any) => d[0]));
-  const xMax = Math.max(...newData.map((d: any) => d[0]));
-  const yMax = Math.max(...newData.map((d: any) => d[1]));
+  const xMin = Math.min(...data.map((d: any) => d[0]));
+  const xMax = Math.max(...data.map((d: any) => d[0]));
+  const yMax = Math.max(...data.map((d: any) => d[1]));
 
   const y = d3
     .scaleLinear()
@@ -69,7 +60,7 @@ export const Chart: FC<Props> = ({ data }) => {
 
   return (
     <StyledDiv>
-      <Chart data={newData} />
+      {/*    <Chart data={newData} /> */}
 
       {/*         <Title>Chart Title</Title>
         <DrawZone>

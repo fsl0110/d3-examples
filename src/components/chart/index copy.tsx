@@ -7,7 +7,7 @@ import store from "../../store";
 interface Props extends SVGAttributes<HTMLDivElement> {
   // optional option to pass datafetching mechanism
   // optional interface for more config from outside
-  data?: any;
+  data: any;
   width?: number;
   height?: number;
   margin?: [number, number, number, number];
@@ -21,8 +21,18 @@ interface Props extends SVGAttributes<HTMLDivElement> {
 
 export type ChartProps = Props & StyleProps;
 
-export const Chart: FC<ChartProps> = () => {
+export const Chart: FC<ChartProps> = ({ children }) => {
+  /*   const dispatch = useDispatch();
+   */
   console.log("chart component");
 
-  return <div />;
+  return (
+    /*    <Provider store={store}> */
+    <StyledDiv>
+      {/*       <svg className="chart" width={width} height={height}>
+        <g transform={`translate(${margin[2]}, ${margin[1]})`}>{children}</g>
+      </svg> */}
+    </StyledDiv>
+    /*     </Provider> */
+  );
 };
