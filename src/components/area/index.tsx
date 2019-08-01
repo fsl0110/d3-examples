@@ -1,9 +1,10 @@
 import React, { FC, SVGAttributes } from "react";
 import classNames from "classnames";
 import * as d3 from "d3";
-import { Data, SharedProps } from "../types";
+import { useSelector } from "react-redux";
+import { AppState, Data, Dimension, Margin } from "../../store/initialState";
 
-export interface AreaProps extends SharedProps, SVGAttributes<SVGPathElement> {
+export interface AreaProps extends SVGAttributes<SVGPathElement> {
   /** Define a background color for the area.
    * @efault aqua
    */
@@ -42,9 +43,6 @@ export interface AreaProps extends SharedProps, SVGAttributes<SVGPathElement> {
 }
 
 export const Area: FC<AreaProps> = ({
-  data,
-  scales,
-  dim,
   color = "aqua",
   type = "curveMonotoneX",
   opacity = 0.3,
@@ -52,14 +50,17 @@ export const Area: FC<AreaProps> = ({
   strokeWidth = 0,
   className
 }) => {
-  if (!scales || !dim || !data) {
-    return null;
-  }
+  const data = useSelector<AppState, Data>(state => state.data.CHART);
+  const scales = useSelector<AppState, any>(state => state.scales.CHART);
+  const dimension = useSelector<AppState, Dimension>(
+    state => state.dimension.CHART
+  );
+  const margin = useSelector<AppState, Margin>(state => state.margin.CHART);
 
   const area = d3
     .area()
     .x((d: Data) => scales.x(d[0]))
-    .y0(dim.height - dim.margin.top - dim.margin.bottom)
+    .y0(dimension.height - margin.top - margin.bottom)
     .y1((d: Data) => scales.y(d[1]))
     .curve(d3[type]);
 

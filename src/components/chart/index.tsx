@@ -14,32 +14,23 @@ interface Props extends SVGAttributes<HTMLDivElement> {
   width?: number;
   height?: number;
   margin?: [number, number, number, number];
-  children: ReactNode | ReactNode[];
+  children?: ReactNode | ReactNode[];
 }
 
 export type ChartProps = Props & StyleProps;
 
-export const Chart: FC<ChartProps> = ({
-  data,
-  width,
-  height = 400,
-  margin = [20, 20, 20, 20],
-  children
-}) => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch({ type: "SET_DIMENSION" });
-    dispatch({ type: "SET_MARGIN" });
-  }, []);
+export const Chart: FC<ChartProps> = ({ children }) => {
+  /*   const dispatch = useDispatch();
+   */
+  console.log("chart component");
 
   return (
-    <Provider store={store}>
-      <StyledDiv>
-        <svg className="chart" width={width} height={height}>
-          <g transform={`translate(${margin[2]}, ${margin[1]})`}>{children}</g>
-        </svg>
-      </StyledDiv>
-    </Provider>
+    /*    <Provider store={store}> */
+    <StyledDiv>
+      {/*       <svg className="chart" width={width} height={height}>
+        <g transform={`translate(${margin[2]}, ${margin[1]})`}>{children}</g>
+      </svg> */}
+    </StyledDiv>
+    /*     </Provider> */
   );
 };

@@ -2,6 +2,7 @@ export const initialState: AppState = {
   isLoading: {},
   hasError: {},
   data: {},
+  scales: {},
   margin: {},
   dimension: {},
   tooltip: {}
@@ -15,7 +16,10 @@ export interface AppState {
     [key: string]: boolean;
   };
   data: {
-    [key: string]: Array<(string | number)[]>;
+    [key: string]: any;
+  };
+  scales: {
+    [key: string]: any;
   };
   margin: {
     [key: string]: Margin;
@@ -39,3 +43,5 @@ export type Margin = {
   bottom: number;
   right: number;
 };
+
+export type Data = any;

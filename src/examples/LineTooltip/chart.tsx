@@ -65,10 +65,13 @@ export const Chart: FC<Props> = ({ data }) => {
 
   const scales = { x, y };
 
+  console.log("chart page", data);
+
   return (
     <StyledDiv>
-      <Chart data="newData">
-        <Title>Chart Title</Title>
+      <Chart data={newData} />
+
+      {/*         <Title>Chart Title</Title>
         <DrawZone>
           <Line>
             <Area />
@@ -87,8 +90,8 @@ export const Chart: FC<Props> = ({ data }) => {
         </Axis>
         <Legends>
           <Legend>Line 1</Legend>
-        </Legends>
-      </Chart>
+        </Legends> */}
+      {/*       </Chart> */}
     </StyledDiv>
   );
 };
