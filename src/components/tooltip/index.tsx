@@ -1,4 +1,4 @@
-import React, { FC, SVGAttributes } from "react";
+import React, { FC, SVGAttributes, Reducer } from "react";
 import * as d3 from "d3";
 import { Data } from "../../store";
 import { Text } from "../../components";
@@ -33,7 +33,7 @@ export const Tooltip: FC<TooltipProps> = ({ children, ...rest }) => {
           dispatch({ type: "SET_TOOLTIP", value: [] });
         }}
       />
-      {tooltip.length && <Text>{children}</Text>}
+      {tooltip && <Text>{children}</Text>}
     </g>
   );
 };

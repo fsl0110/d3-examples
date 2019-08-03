@@ -1,6 +1,9 @@
-import { createContext } from "react";
-import { initialState } from ".";
+import { createContext, Dispatch } from "react";
+import { initialState, ActionTypes } from ".";
 
-const context = createContext<any>(initialState);
+const context = createContext({
+  state: initialState,
+  dispatch: (() => null) as Dispatch<ActionTypes>
+});
 
 export default context;

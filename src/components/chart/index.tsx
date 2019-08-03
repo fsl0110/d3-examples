@@ -3,7 +3,8 @@ import React, {
   HTMLAttributes,
   ReactNode,
   useEffect,
-  useReducer
+  useReducer,
+  Reducer
 } from "react";
 import {
   initialState,
@@ -11,7 +12,9 @@ import {
   Dimension,
   Margin,
   Data,
-  Scale
+  Scale,
+  AppState,
+  ActionTypes
 } from "../../store";
 import Context from "../../store/context";
 import { StyledDiv, StyleProps } from "./styles";
@@ -46,8 +49,11 @@ export const Chart: FC<ChartProps> = ({
   children,
   ...rest
 }) => {
-  const [state, dispatch] = useReducer(chartReducer, initialState);
-
+  const [state, dispatch] = useReducer<Reducer<AppState, ActionTypes>>(
+    chartReducer,
+    initialState
+  );
+  console.log("chart state", state);
   useEffect(() => {
     data && dispatch({ type: "SET_DATA", payload: data });
   }, [data]);
@@ -67,8 +73,6 @@ export const Chart: FC<ChartProps> = ({
   if (!state.data.length) {
     return null;
   }
-
-  console.log("chart state", state);
 
   return (
     <Context.Provider value={{ state, dispatch }}>

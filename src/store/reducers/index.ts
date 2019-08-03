@@ -1,5 +1,5 @@
+import { Reducer } from "react";
 import produce from "immer";
-import { Reducer } from "redux";
 import { initialState, AppState } from "..";
 import {
   ActionTypes,
