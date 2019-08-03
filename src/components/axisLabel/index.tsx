@@ -1,8 +1,8 @@
 import React, { FC, SVGAttributes, useReducer } from "react";
 import classNames from "classnames";
 import { Text, TextProps } from "..";
-import { initialState, chartReducer, AxisLabelAlign } from "../../store";
-import { useAxisLabel } from "../../hooks";
+import { AxisLabelAlign } from "../../store";
+import { useAxisLabel, useStore } from "../../hooks";
 
 interface Props extends SVGAttributes<SVGGElement> {
   /** Define an alignment to position the label. */
@@ -21,12 +21,10 @@ export const AxisLabel: FC<AxisLabelProps> = ({
   children,
   ...rest
 }) => {
-  const [store] = useReducer(chartReducer, initialState);
-  const [transform, textAnchor] = useAxisLabel(
-    align,
-    store.dimension,
-    store.margin
-  );
+  const {
+    state: { dimension, margin }
+  } = useStore();
+  const [transform, textAnchor] = useAxisLabel(align, dimension, margin);
 
   return (
     <g transform={transform} {...rest}>

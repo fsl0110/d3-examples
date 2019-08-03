@@ -1,9 +1,9 @@
-import React, { FC, HTMLAttributes } from "react";
+import React, { FC, HTMLAttributes, ReactNode } from "react";
 import classNames from "classnames";
 import { StyledDiv } from "./styles";
 
 export interface LegendProps extends HTMLAttributes<HTMLDivElement> {
-  children: string;
+  children: string | ReactNode;
 }
 
 export const Legend: FC<LegendProps> = ({ className, children, ...rest }) => {

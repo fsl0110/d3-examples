@@ -26,7 +26,7 @@ export interface AppState {
   scale: Scale;
   margin: Margin;
   dimension: Dimension;
-  tooltip: string | number | Date;
+  tooltip: string | number | Date | [];
 }
 
 export type Data = any;

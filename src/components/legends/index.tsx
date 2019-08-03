@@ -1,6 +1,6 @@
 import React, { FC, SVGAttributes, ReactNode, useReducer } from "react";
 import classNames from "classnames";
-import { initialState, chartReducer } from "../../store";
+import { useStore } from "../../hooks";
 import { StyledDiv } from "./styles";
 
 export interface LegendsProps extends SVGAttributes<SVGGElement> {
@@ -21,10 +21,12 @@ export interface LegendsProps extends SVGAttributes<SVGGElement> {
 }
 
 export const Legends: FC<LegendsProps> = ({ className, children, ...rest }) => {
-  const [store] = useReducer(chartReducer, initialState);
+  const {
+    state: { dimension }
+  } = useStore();
 
   return (
-    <g transform={`translate(${0}, ${store.dimension.height})`} {...rest}>
+    <g transform={`translate(${0}, ${dimension.height})`} {...rest}>
       <foreignObject>
         <StyledDiv className={classNames("legends", className)}>
           {children}

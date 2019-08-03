@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import * as d3 from "d3";
 import styled from "styled-components";
 import { Data } from "../../store";
-import { Chart, DrawZone, Line } from "../../components";
+import { Chart, DrawZone, Line, Axis } from "../../components";
 
 const StyledDiv = styled.div`
   svg {
@@ -36,14 +36,13 @@ export const ChartStart: FC<Props> = ({ data }) => {
     .domain([xMin, xMax])
     .range([0, width - margin.right]);
 
-  console.log("chart page", data);
-
   return (
     <StyledDiv>
       <Chart data={data} scale={{ x, y }}>
         <DrawZone>
           <Line />
         </DrawZone>
+        <Axis align="axisLeft" />
       </Chart>
     </StyledDiv>
   );

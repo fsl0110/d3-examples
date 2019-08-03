@@ -1,6 +1,7 @@
-import React, { FC, SVGAttributes, useReducer } from "react";
+import React, { FC, SVGAttributes } from "react";
 import classNames from "classnames";
-import { initialState, chartReducer, Data } from "../../store";
+import { Data } from "../../store";
+import { useStore } from "../../hooks";
 
 interface ValuesProps extends SVGAttributes<SVGGElement> {
   /** No Childrens allowed */
@@ -8,17 +9,19 @@ interface ValuesProps extends SVGAttributes<SVGGElement> {
 }
 
 export const Values: FC<ValuesProps> = ({ className }) => {
-  const [store] = useReducer(chartReducer, initialState);
+  const {
+    state: { data, scale }
+  } = useStore();
 
   return (
     <g className={classNames("values", className)}>
-      {store.data.map((item: Data, i: number) => {
+      {data.map((item: Data, i: number) => {
         return (
           <text
             className="value"
             key={i}
-            x={store.scale.x(item[0])}
-            y={store.scale.y(item[1]) - 15}
+            x={scale.x(item[0])}
+            y={scale.y(item[1]) - 15}
             textAnchor="middle"
             fill="blue"
           >

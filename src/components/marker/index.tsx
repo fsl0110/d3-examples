@@ -1,6 +1,7 @@
 import React, { FC, SVGAttributes, useReducer } from "react";
 import classNames from "classnames";
-import { initialState, chartReducer, Item } from "../../store";
+import { Item } from "../../store";
+import { useStore } from "../../hooks";
 
 export interface MarkerProps extends SVGAttributes<SVGGElement> {
   /** Define a radius for the circle.
@@ -31,16 +32,18 @@ export const Marker: FC<MarkerProps> = ({
   width = 2,
   className
 }) => {
-  const [store] = useReducer(chartReducer, initialState);
+  const {
+    state: { data, scale }
+  } = useStore();
 
   return (
     <g className={classNames("marker", className)}>
-      {store.data.map((item: Item, i: number) => (
+      {data.map((item: Item, i: number) => (
         <circle
           className="marker-circle"
           key={i}
-          cx={store.scale.x(item[0])}
-          cy={store.scale.y(item[1])}
+          cx={scale.x(item[0])}
+          cy={scale.y(item[1])}
           r={radius}
           fill="none"
           stroke={color}

@@ -9,7 +9,6 @@ const StyledDiv = styled.div`
 `;
 
 export const LineTooltip: FC = () => {
-  console.log("LineTooltip");
   return (
     <StyledDiv>
       <FetchDispatch fetch={axiosOpenFDA(openFDA.foodEnforcementReports(""))}>

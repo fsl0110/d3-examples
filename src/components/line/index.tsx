@@ -1,6 +1,7 @@
-import React, { FC, SVGAttributes, ReactNode, useReducer } from "react";
+import React, { FC, SVGAttributes, ReactNode } from "react";
 import * as d3 from "d3";
-import { initialState, chartReducer, Data } from "../../store";
+import { Data } from "../../store";
+import { useStore } from "../../hooks";
 
 export interface LineProps extends SVGAttributes<SVGGElement> {
   /**
@@ -47,19 +48,24 @@ export const Line: FC<LineProps> = ({
   children,
   ...rest
 }) => {
-  const [store] = useReducer(chartReducer, initialState);
+  const {
+    state: { scale, data }
+  } = useStore();
+
+  console.log("line scale x", scale.x);
+  console.log("line data", data);
 
   const lineGenerator = d3
     .line()
-    .x((d: Data) => store.scale.x(d[0]))
-    .y((d: Data) => store.scale.y(d[1]))
+    .x((d: Data) => scale.x(d[0]))
+    .y((d: Data) => scale.y(d[1]))
     .curve(d3[lineType]);
 
   return (
     <g {...rest}>
       <path
         className="line"
-        d={lineGenerator(store.data) || ""}
+        d={lineGenerator(data) || ""}
         fill="none"
         stroke={color}
         strokeWidth={width}

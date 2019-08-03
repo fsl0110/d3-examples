@@ -1,6 +1,7 @@
 import React, { FC, SVGAttributes, useReducer } from "react";
 import classNames from "classnames";
-import { initialState, chartReducer, Item } from "../../store";
+import { Item } from "../../store";
+import { useStore } from "../../hooks";
 
 export interface CrossProps extends SVGAttributes<SVGGElement> {
   /**
@@ -135,7 +136,9 @@ export const Cross: FC<CrossProps> = ({
   className,
   ...rest
 }) => {
-  const [store] = useReducer(chartReducer, initialState);
+  const {
+    state: { data, scale, dimension, margin }
+  } = useStore();
 
   const setXCross = (
     item: Item,
@@ -145,14 +148,14 @@ export const Cross: FC<CrossProps> = ({
     crossX: number | undefined
   ) => {
     if (cross || crossX) {
-      return store.scale.y(item[1]) + 1 - (crossX! || cross!);
+      return scale.y(item[1]) + 1 - (crossX! || cross!);
     }
 
     if (full || fullX) {
-      return -store.margin.top;
+      return -margin.top;
     }
 
-    return store.scale.y(item[1]) + 1;
+    return scale.y(item[1]) + 1;
   };
 
   const setYCross = (
@@ -163,27 +166,27 @@ export const Cross: FC<CrossProps> = ({
     crossY: number | undefined
   ) => {
     if (cross || crossY) {
-      return store.scale.x(item[0]) + (crossY || cross);
+      return scale.x(item[0]) + (crossY || cross);
     }
 
     if (full || fullY) {
-      return store.dimension.width - store.margin.right;
+      return dimension.width - margin.right;
     }
 
-    return store.scale.x(item[0]);
+    return scale.x(item[0]);
   };
 
   return (
     <g className={classNames("cross", className)} {...rest}>
-      {store.data.map((item: Item, i: number) => (
+      {data.map((item: Item, i: number) => (
         <g className="cross-lines" key={i}>
           {/** The vertical Cross-Line */}
           <line
             className="cross-line-x"
             opacity={hideX || hide ? 0 : 1}
-            x1={store.scale.x(item[0]) + 1}
-            x2={store.scale.x(item[0]) + 1}
-            y1={store.dimension.height - store.margin.top - store.margin.bottom}
+            x1={scale.x(item[0]) + 1}
+            x2={scale.x(item[0]) + 1}
+            y1={dimension.height - margin.top - margin.bottom}
             y2={setXCross(item, full, fullX, cross, crossX)}
             stroke={colorX || color}
             strokeWidth={widthX || width}
@@ -195,8 +198,8 @@ export const Cross: FC<CrossProps> = ({
             opacity={hideY || hide ? 0 : 1}
             x1={0}
             x2={setYCross(item, full, fullY, cross, crossY)}
-            y1={store.scale.y(item[1])}
-            y2={store.scale.y(item[1])}
+            y1={scale.y(item[1])}
+            y2={scale.y(item[1])}
             stroke={colorY || color}
             strokeWidth={widthY || width}
             strokeDasharray={dashY || dash}

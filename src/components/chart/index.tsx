@@ -13,7 +13,7 @@ import {
   Data,
   Scale
 } from "../../store";
-
+import Context from "../../store/context";
 import { StyledDiv, StyleProps } from "./styles";
 
 interface ChartProps extends StyleProps, HTMLAttributes<HTMLDivElement> {
@@ -46,7 +46,7 @@ export const Chart: FC<ChartProps> = ({
   children,
   ...rest
 }) => {
-  const [store, dispatch] = useReducer(chartReducer, initialState);
+  const [state, dispatch] = useReducer(chartReducer, initialState);
 
   useEffect(() => {
     data && dispatch({ type: "SET_DATA", payload: data });
@@ -64,13 +64,21 @@ export const Chart: FC<ChartProps> = ({
     scale && dispatch({ type: "SET_SCALE", scale });
   }, [scale]);
 
+  if (!state.data.length) {
+    return null;
+  }
+
+  console.log("chart state", state);
+
   return (
-    <StyledDiv {...rest}>
-      <svg width={store.dimension.width} height={store.dimension.height}>
-        <g transform={`translate(${store.margin.left}, ${store.margin.top})`}>
-          {children}
-        </g>
-      </svg>
-    </StyledDiv>
+    <Context.Provider value={{ state, dispatch }}>
+      <StyledDiv {...rest}>
+        <svg width={state.dimension.width} height={state.dimension.height}>
+          <g transform={`translate(${state.margin.left}, ${state.margin.top})`}>
+            {children}
+          </g>
+        </svg>
+      </StyledDiv>
+    </Context.Provider>
   );
 };

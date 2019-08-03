@@ -9,8 +9,8 @@ import React, {
 import * as d3 from "d3";
 import classNames from "classnames";
 import { StyledAxisG, StyleProps } from "./styles";
-import { useAxis } from "../../hooks";
-import { initialState, chartReducer, AxisAlign } from "../../store";
+import { useAxis, useStore } from "../../hooks";
+import { AxisAlign } from "../../store";
 
 export interface AxisProps extends StyleProps, SVGAttributes<SVGGElement> {
   /** Alignment of the Axis and Ticks. */
@@ -77,7 +77,7 @@ export interface AxisProps extends StyleProps, SVGAttributes<SVGGElement> {
 export const Axis: FC<AxisProps> = ({
   align,
   hideAxisLine = false,
-  ticks,
+  ticks = 5,
   tickValues,
   tickArguments,
   tickFormat,
@@ -100,12 +100,15 @@ export const Axis: FC<AxisProps> = ({
   ...rest
 }) => {
   const el = useRef<SVGGElement>(null);
-  const [store] = useReducer(chartReducer, initialState);
-  const [transform, scale] = useAxis(align, store);
+  const {
+    state: { scale, dimension, margin }
+  } = useStore();
+
+  const [transform, currentScale] = useAxis(align, scale, dimension, margin);
 
   useEffect(() => {
     // @ts-ignore
-    const axis = d3[align]().scale(scale);
+    const axis = d3[align]().scale(currentScale);
 
     // api options
     ticks && axis.ticks(ticks);

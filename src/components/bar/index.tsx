@@ -1,7 +1,8 @@
-import React, { FC, useRef, useEffect, SVGAttributes, useReducer } from "react";
+import React, { FC, useRef, useEffect, SVGAttributes } from "react";
 import classNames from "classnames";
-import { initialState, chartReducer, Data } from "../../store";
 import * as d3 from "d3";
+import { Data } from "../../store";
+import { useStore } from "../../hooks";
 
 export interface BarProps extends SVGAttributes<SVGGElement> {
   /** No Childrens allowed */
@@ -10,45 +11,46 @@ export interface BarProps extends SVGAttributes<SVGGElement> {
 
 export const Bar: FC<BarProps> = ({ ...rest }) => {
   const el = useRef<SVGGElement>(null);
-  const [store] = useReducer(chartReducer, initialState);
+  const {
+    state: { data, dimension, margin, scale }
+  } = useStore();
 
   useEffect(() => {
     d3.select(el.current)
       .selectAll("rect")
-      .data(store.data)
+      .data(data)
       .enter()
       .append("rect")
-      .attr("x", (d: Data) => store.scale.x(d[0]))
-      .attr("y", store.dimension.height - store.margin.bottom)
-      .attr("width", store.scale.x.bandwidth())
+      .attr("x", (d: Data) => scale.x(d[0]))
+      .attr("y", dimension.height - margin.bottom)
+      .attr("width", scale.x.bandwidth())
       .style("fill", "aqua")
       .transition()
       .duration(300)
       .ease(d3.easePolyInOut)
-      .attr("y", (d: Data) => store.scale.y(d[1]))
+      .attr("y", (d: Data) => scale.y(d[1]))
       .attr(
         "height",
-        (d: Data) =>
-          store.dimension.height - store.scale.y(d[1]) - store.margin.bottom
+        (d: Data) => dimension.height - scale.y(d[1]) - margin.bottom
       );
 
     d3.select(el.current)
       .selectAll("text")
-      .data(store.data)
+      .data(data)
       .enter()
       .append("text")
-      .attr("x", (d: Data) => store.scale.x(d[0]) + store.margin.left)
-      .attr("y", store.dimension.height - store.margin.bottom - 5)
+      .attr("x", (d: Data) => scale.x(d[0]) + margin.left)
+      .attr("y", dimension.height - margin.bottom - 5)
       .transition()
       .duration(300)
       .ease(d3.easePolyInOut)
       .text((d: Data) => d[1].toString())
-      .attr("y", (d: Data) => store.scale.y(d[1]) - 5)
+      .attr("y", (d: Data) => scale.y(d[1]) - 5)
       .style("fill", "red")
       .style("font-size", "14px")
       .style("font-family", "arial")
       .attr("text-anchor", "middle");
-  }, [store.data, store.scale, store.dimension, store.margin]);
+  }, [data, scale, dimension, margin]);
 
   return <g className={classNames("bar", classNames)} ref={el} {...rest} />;
 };

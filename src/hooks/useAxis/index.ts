@@ -1,28 +1,33 @@
-import { AppState, AxisAlign } from "../../store";
+import { AppState, AxisAlign, Scale, Dimension, Margin } from "../../store";
 
-export function useAxis(align: AxisAlign, store: AppState) {
+export function useAxis(
+  align: AxisAlign,
+  scale: Scale,
+  dimension: Dimension,
+  margin: Margin
+) {
   let transform: string = "";
   let currentScale: any;
 
   switch (align) {
     case "axisLeft":
-      transform = `translate(${store.margin.left}, ${0})`;
-      currentScale = store.scale.y;
+      transform = `translate(${margin.left}, ${0})`;
+      currentScale = scale.y;
       break;
     case "axisBottom":
-      transform = `translate(${store.margin.left}, ${store.dimension.height -
-        store.margin.bottom})`;
-      currentScale = store.scale.x;
+      transform = `translate(${margin.left}, ${dimension.height -
+        margin.bottom})`;
+      currentScale = scale.x;
       break;
     case "axisRight":
       // TODO: add position
       transform = `translate(${0}, ${0})`;
-      currentScale = store.scale.y;
+      currentScale = scale.y;
       break;
     case "axisTop":
       // TODO: add position
       transform = `translate(${0}, ${0})`;
-      currentScale = store.scale.x;
+      currentScale = scale.x;
       break;
   }
   return [transform, currentScale];
