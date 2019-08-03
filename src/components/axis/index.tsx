@@ -1,11 +1,4 @@
-import React, {
-  FC,
-  useEffect,
-  useRef,
-  SVGAttributes,
-  ReactNode,
-  useReducer
-} from "react";
+import React, { FC, useEffect, useRef, SVGAttributes, ReactNode } from "react";
 import * as d3 from "d3";
 import classNames from "classnames";
 import { StyledAxisG, StyleProps } from "./styles";
@@ -103,7 +96,6 @@ export const Axis: FC<AxisProps> = ({
   const {
     state: { scale, dimension, margin }
   } = useStore();
-
   const [transform, currentScale] = useAxis(align, scale, dimension, margin);
 
   useEffect(() => {

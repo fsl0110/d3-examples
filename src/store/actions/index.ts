@@ -1,7 +1,7 @@
-import { axiosOpenFDA, openFDA } from "../../data/rest/openFDA";
+/* import { axiosOpenFDA, openFDA } from "../../data/rest/openFDA";
 import { Dispatch } from "redux";
-import { AxiosResponse, AxiosError } from "axios";
-import { Dimension, Margin, Scale } from "..";
+import { AxiosResponse, AxiosError } from "axios"; */
+import { Dimension, Margin, Scale, Tooltip } from "..";
 
 export const SET_LOADING = "SET_LOADING";
 export const SET_ERROR = "SET_ERROR";
@@ -58,25 +58,13 @@ export const setMargin = (margin: Margin): SetMargin => {
 
 export interface SetTooltip {
   type: typeof SET_TOOLTIP;
-  value: string | number | Date;
+  value: Tooltip;
 }
 
-export const setTooltip = (value: string | number | Date): SetTooltip => {
+export const setTooltip = (value: Tooltip): SetTooltip => {
   return {
     type: SET_TOOLTIP,
     value
-  };
-};
-
-export interface SetLoading {
-  type: typeof SET_LOADING;
-  isLoading: boolean;
-}
-
-export const setLoading = (isLoading: boolean): SetLoading => {
-  return {
-    type: SET_LOADING,
-    isLoading
   };
 };
 
@@ -92,6 +80,18 @@ export const setData = (payload: Array<(string | number)[]>): SetData => {
   };
 };
 
+export interface SetLoading {
+  type: typeof SET_LOADING;
+  isLoading: boolean;
+}
+
+export const setLoading = (isLoading: boolean): SetLoading => {
+  return {
+    type: SET_LOADING,
+    isLoading
+  };
+};
+
 export interface SetError {
   type: typeof SET_ERROR;
   hasError: boolean;
@@ -104,7 +104,7 @@ export const setError = (hasError: boolean): SetError => {
   };
 };
 
-export const fetchData = (term: string = "") => (dispatch: Dispatch) => {
+/* export const fetchData = (term: string = "") => (dispatch: Dispatch) => {
   dispatch(setLoading(true));
   axiosOpenFDA(openFDA.foodEnforcementReports(term))
     .then((res: AxiosResponse) => {
@@ -120,3 +120,4 @@ export const fetchData = (term: string = "") => (dispatch: Dispatch) => {
       dispatch(setLoading(false));
     });
 };
+ */

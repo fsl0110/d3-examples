@@ -1,7 +1,8 @@
 import React, { FC, SVGAttributes, useReducer } from "react";
 import classNames from "classnames";
 import * as d3 from "d3";
-import { initialState, chartReducer, Data } from "../../store";
+import { Data } from "../../store";
+import { useStore } from "../../hooks";
 
 export interface AreaProps extends SVGAttributes<SVGPathElement> {
   /** Define a background color for the area.
@@ -50,13 +51,15 @@ export const Area: FC<AreaProps> = ({
   className,
   ...rest
 }) => {
-  const [store] = useReducer(chartReducer, initialState);
+  const {
+    state: { data, scale, dimension, margin }
+  } = useStore();
 
   const area = d3
     .area()
-    .x((d: Data) => store.scale.x(d[0]))
-    .y0(store.dimension.height - store.margin.top - store.margin.bottom)
-    .y1((d: Data) => store.scale.y(d[1]))
+    .x((d: Data) => scale.x(d[0]))
+    .y0(dimension.height - margin.top - margin.bottom)
+    .y1((d: Data) => scale.y(d[1]))
     .curve(d3[type]);
 
   return (
@@ -66,7 +69,7 @@ export const Area: FC<AreaProps> = ({
       fillOpacity={opacity}
       stroke={strokeColor}
       strokeWidth={strokeWidth}
-      d={area(store.data) || undefined}
+      d={area(data) || undefined}
       {...rest}
     />
   );

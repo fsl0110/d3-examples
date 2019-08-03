@@ -52,9 +52,6 @@ export const Line: FC<LineProps> = ({
     state: { scale, data }
   } = useStore();
 
-  console.log("line scale x", scale.x);
-  console.log("line data", data);
-
   const lineGenerator = d3
     .line()
     .x((d: Data) => scale.x(d[0]))
