@@ -1,11 +1,10 @@
-import React, { FC, SVGAttributes, Reducer } from "react";
+import React, { FC, SVGAttributes, ReactNode } from "react";
 import * as d3 from "d3";
 import { Data } from "../../store";
-import { Text } from "../../components";
 import { useStore } from "../../hooks";
 
 interface TooltipProps extends SVGAttributes<SVGGElement> {
-  children: string;
+  children: ReactNode | ReactNode[];
 }
 
 export const Tooltip: FC<TooltipProps> = ({ children, ...rest }) => {
@@ -17,23 +16,30 @@ export const Tooltip: FC<TooltipProps> = ({ children, ...rest }) => {
   let bisectMouseValue = d3.bisector((d: Data) => d[0]).left;
 
   return (
-    <g {...rest}>
+    <g transform={`translate(20,20)`} {...rest}>
       <rect
         width={dimension.width}
         height={dimension.height}
         opacity="0"
         onMouseMove={e => {
           const mouseValue = scale.x.invert(e.nativeEvent.offsetX);
-          const i = bisectMouseValue(data, mouseValue, 1, data.length);
-          if (data[i - 1] !== data) {
-            dispatch({ type: "SET_TOOLTIP", value: data[i - 1] });
+          const i = bisectMouseValue(data, mouseValue, 0, data.length);
+
+          if (data[i] !== data) {
+            dispatch({ type: "SET_TOOLTIP", value: data[i] });
           }
         }}
         onMouseOut={() => {
           dispatch({ type: "SET_TOOLTIP", value: [] });
         }}
       />
-      {tooltip && <Text>{children}</Text>}
+      {tooltip.length && (
+        <g className="tooltip">
+          {React.Children.map(children, child =>
+            React.cloneElement(child as never, { tooltip: [tooltip] })
+          )}
+        </g>
+      )}
     </g>
   );
 };

@@ -2,7 +2,17 @@ import React, { FC } from "react";
 import * as d3 from "d3";
 import styled from "styled-components";
 import { Data } from "../../store";
-import { Chart, DrawZone, Line, Axis, Marker, Area } from "../../components";
+import {
+  Chart,
+  DrawZone,
+  Line,
+  Axis,
+  Marker,
+  Area,
+  Cross,
+  Tooltip,
+  Values
+} from "../../components";
 
 const StyledDiv = styled.div`
   svg {
@@ -18,7 +28,7 @@ export const ChartStart: FC<Props> = ({ data }) => {
 
   const outerHight = 500;
   const outerWidth = 800;
-  const margin = { top: 20, right: 20, bottom: 20, left: 40 };
+  const margin = { top: 20, right: 20, bottom: 20, left: 20 };
   const width = outerWidth - margin.left * 2 - margin.right;
   const height = outerHight - margin.top - margin.bottom;
 
@@ -38,12 +48,16 @@ export const ChartStart: FC<Props> = ({ data }) => {
 
   return (
     <StyledDiv>
-      <Chart data={data} scale={{ x, y }}>
+      <Chart data={data} scale={{ x, y }} dimension={{ height, width }}>
         <DrawZone>
           <Line />
-          <Marker />
           <Area />
         </DrawZone>
+        <Tooltip>
+          <Values />
+          <Cross hideY />
+          <Marker />
+        </Tooltip>
         <Axis align="axisLeft" />
         <Axis align="axisBottom" />
       </Chart>

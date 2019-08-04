@@ -73,7 +73,7 @@ export const Axis: FC<AxisProps> = ({
   ticks = 5,
   tickValues,
   tickArguments,
-  tickFormat,
+  tickFormat = d3.format(".0f"),
   tickSize,
   tickSizeInner,
   tickSizeOuter,

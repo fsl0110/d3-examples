@@ -1,4 +1,4 @@
-import React, { FC, SVGAttributes, useReducer } from "react";
+import React, { FC, SVGAttributes } from "react";
 import classNames from "classnames";
 import { Item } from "../../store";
 import { useStore } from "../../hooks";
@@ -107,14 +107,17 @@ export interface CrossProps extends SVGAttributes<SVGGElement> {
    */
   crossY?: number;
 
-  /** Pass Classname */
-  className?: string;
+  /** Map tooltip instead of datas when Tooltip Component is parent of this component.
+   * Tooltip values comes automatically from the parent Tooltip Component via cloneElement.
+   */
+  tooltip?: Item;
 
   /** No Childrens allowed */
   children?: never;
 }
 
 export const Cross: FC<CrossProps> = ({
+  tooltip,
   hide = false,
   hideX,
   hideY,
@@ -139,6 +142,8 @@ export const Cross: FC<CrossProps> = ({
   const {
     state: { data, scale, dimension, margin }
   } = useStore();
+
+  let dataToMap = tooltip || data;
 
   const setXCross = (
     item: Item,
@@ -178,7 +183,7 @@ export const Cross: FC<CrossProps> = ({
 
   return (
     <g className={classNames("cross", className)} {...rest}>
-      {data.map((item: Item, i: number) => (
+      {dataToMap.map((item: Item, i: number) => (
         <g className="cross-lines" key={i}>
           {/** The vertical Cross-Line */}
           <line

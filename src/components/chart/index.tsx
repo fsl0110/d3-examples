@@ -3,8 +3,7 @@ import React, {
   HTMLAttributes,
   ReactNode,
   useEffect,
-  useReducer,
-  Reducer
+  useReducer
 } from "react";
 import {
   initialState,
@@ -12,9 +11,7 @@ import {
   Dimension,
   Margin,
   Data,
-  Scale,
-  AppState,
-  ActionTypes
+  Scale
 } from "../../store";
 import Context from "../../store/context";
 import { StyledDiv, StyleProps } from "./styles";
@@ -31,6 +28,7 @@ interface ChartProps extends StyleProps, HTMLAttributes<HTMLDivElement> {
 
   /** Override default margins with your individual margins */
   margin?: Margin;
+
   /** Wether the error indicator should be shown. */
   hasError?: boolean;
 
@@ -49,11 +47,8 @@ export const Chart: FC<ChartProps> = ({
   children,
   ...rest
 }) => {
-  const [state, dispatch] = useReducer<Reducer<AppState, ActionTypes>>(
-    chartReducer,
-    initialState
-  );
-  console.log("chart state", state);
+  const [state, dispatch] = useReducer(chartReducer, initialState);
+
   useEffect(() => {
     data && dispatch({ type: "SET_DATA", payload: data });
   }, [data]);
@@ -77,7 +72,10 @@ export const Chart: FC<ChartProps> = ({
   return (
     <Context.Provider value={{ state, dispatch }}>
       <StyledDiv {...rest}>
-        <svg width={state.dimension.width} height={state.dimension.height}>
+        <svg
+          width={state.dimension.width + 40}
+          height={state.dimension.height + 40}
+        >
           <g transform={`translate(${state.margin.left}, ${state.margin.top})`}>
             {children}
           </g>

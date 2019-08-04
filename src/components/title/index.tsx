@@ -1,4 +1,4 @@
-import React, { FC, SVGAttributes, useReducer } from "react";
+import React, { FC, SVGAttributes } from "react";
 import classNames from "classnames";
 import { Text, TextProps } from "..";
 import { useStore } from "../../hooks";

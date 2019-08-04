@@ -18,7 +18,7 @@ export const Text: FC<TextProps> = ({
   children
 }) => {
   return (
-    <foreignObject className="foreign">
+    <foreignObject>
       <StyledDiv
         className={classNames("text", className)}
         color={color}

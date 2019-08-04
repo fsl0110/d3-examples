@@ -16,7 +16,7 @@ export const initialState: AppState = {
     height: 400,
     width: 600
   },
-  tooltip: ""
+  tooltip: []
 };
 
 export interface AppState {
@@ -29,7 +29,7 @@ export interface AppState {
   tooltip: Tooltip;
 }
 
-export type Tooltip = string | number | Date | [];
+export type Tooltip = [];
 
 export type Data = any;
 
@@ -58,19 +58,3 @@ export type AxisLabelAlign =
   | "horizontalRight";
 
 export type AxisAlign = "axisLeft" | "axisRight" | "axisBottom" | "axisTop";
-
-/* 
-export type Reducer<S = any, A extends Action = AnyAction> = (
-  state: S | undefined,
-  action: A
-) => S;
-
-export interface Action<T = any> {
-  type: T;
-}
-
-export interface AnyAction extends Action {
-  // Allows any extra properties to be defined in an action.
-  [extraProps: string]: any;
-}
- */

@@ -1,4 +1,4 @@
-import React, { FC, SVGAttributes, useReducer } from "react";
+import React, { FC, SVGAttributes } from "react";
 import classNames from "classnames";
 import { Item } from "../../store";
 import { useStore } from "../../hooks";
@@ -22,11 +22,17 @@ export interface MarkerProps extends SVGAttributes<SVGGElement> {
    */
   width?: number; // TODO: implement
 
+  /** Map tooltip instead of datas when Tooltip Component is parent of this component.
+   * Tooltip values comes automatically from the parent Tooltip Component via cloneElement.
+   */
+  tooltip?: Item;
+
   /** No Childrens allowed */
   children?: never;
 }
 
 export const Marker: FC<MarkerProps> = ({
+  tooltip,
   radius = 5,
   color = "red",
   width = 2,
@@ -36,9 +42,11 @@ export const Marker: FC<MarkerProps> = ({
     state: { data, scale }
   } = useStore();
 
+  let dataToMap = tooltip || data;
+
   return (
     <g className={classNames("marker", className)}>
-      {data.map((item: Item, i: number) => (
+      {dataToMap.map((item: Item, i: number) => (
         <circle
           className="marker-circle"
           key={i}

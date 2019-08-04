@@ -1,4 +1,4 @@
-import React, { FC, SVGAttributes, useReducer } from "react";
+import React, { FC, SVGAttributes } from "react";
 import classNames from "classnames";
 import * as d3 from "d3";
 import { Data } from "../../store";

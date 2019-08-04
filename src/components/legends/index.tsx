@@ -1,4 +1,4 @@
-import React, { FC, SVGAttributes, ReactNode, useReducer } from "react";
+import React, { FC, SVGAttributes, ReactNode } from "react";
 import classNames from "classnames";
 import { useStore } from "../../hooks";
 import { StyledDiv } from "./styles";

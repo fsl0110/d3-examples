@@ -1,4 +1,4 @@
-import { AppState, AxisAlign, Scale, Dimension, Margin } from "../../store";
+import { AxisAlign, Scale, Dimension, Margin } from "../../store";
 
 export function useAxis(
   align: AxisAlign,

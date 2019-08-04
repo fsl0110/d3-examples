@@ -5,5 +5,9 @@ export interface DrawZoneProps extends SVGAttributes<SVGGElement> {
 }
 
 export const DrawZone: FC<DrawZoneProps> = ({ children, ...rest }) => {
-  return <g {...rest}>{children}</g>;
+  return (
+    <g className="drawzone" transform={`translate(20,20)`} {...rest}>
+      {children}
+    </g>
+  );
 };
