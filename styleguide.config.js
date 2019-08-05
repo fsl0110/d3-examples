@@ -3,6 +3,14 @@ const path = require("path");
 module.exports = {
   title: "D3 Examples",
   components: "src/examples/**/*.tsx",
+  sections: [
+    ["With Tooltip Examples", "withTooltip"],
+    ["Without Tooltip Examples ", "withoutTooltip"]
+  ].map(([name, folder]) => ({
+    name,
+    components: `src/examples/${folder}/**/[A-Z|a-z]*.{ts,tsx}`,
+    sectionDepth: 2
+  })),
   // If true only components with a markdown file will be shown in Styleguidist.
   // If false every component will be listed in Styleguidist
   skipComponentsWithoutExample: true,
