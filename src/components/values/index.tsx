@@ -1,8 +1,8 @@
-import React, { FC, SVGAttributes } from "react";
+import React, {FC, SVGAttributes} from "react";
 import classNames from "classnames";
-import { Data, Item } from "../../store";
-import { useStore } from "../../hooks";
-import { StyledText, StyleProps } from "./styles";
+import {Data, Item} from "../../store";
+import {useStore} from "../../hooks";
+import {StyledText, StyleProps} from "./styles";
 
 interface Props extends SVGAttributes<SVGGElement> {
   /** Map tooltip instead of datas when Tooltip Component is parent of this component.
@@ -15,9 +15,9 @@ interface Props extends SVGAttributes<SVGGElement> {
 
 export type ValuesProps = Props & StyleProps;
 
-export const Values: FC<ValuesProps> = ({ tooltip, className }) => {
+export const Values: FC<ValuesProps> = ({tooltip, className}) => {
   const {
-    state: { data, scale }
+    state: {data, scale},
   } = useStore();
 
   let dataToMap = tooltip || data;
@@ -26,13 +26,7 @@ export const Values: FC<ValuesProps> = ({ tooltip, className }) => {
     <g className={classNames("values", className)}>
       {dataToMap.map((item: Data, i: number) => {
         return (
-          <StyledText
-            className="value"
-            key={i}
-            x={scale.x(item[0])}
-            y={scale.y(item[1]) - 15}
-            textAnchor="middle"
-          >
+          <StyledText className="value" key={i} x={scale.x(item[0])} y={scale.y(item[1]) - 15} textAnchor="middle">
             {item[1]}
           </StyledText>
         );

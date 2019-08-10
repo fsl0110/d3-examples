@@ -18,7 +18,9 @@
     "styleguide": "yarn styleguidist server",
     "styleguide:build": "yarn styleguidist build",
     "styleguide:build:serve": "yarn styleguidist build && serve ./styleguide",
-    "lint": "stylelint src/**/*.scss",
+    "lint": "yarn lint:scripts && yarn lint:styles",
+    "lint:scripts": "tslint -p ./tsconfig.json",
+    "lint:styles": "stylelint src/**/*.scss",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -69,7 +71,11 @@
     "stylelint-prettier": "^1.1.1",
     "stylelint-processor-styled-components": "^1.8.0",
     "stylelint-scss": "^3.9.3",
-    "typescript": "3.5.3"
+    "tslint": "^5.18.0",
+    "tslint-react": "^4.0.0",
+    "tslint-sonarts": "^1.9.0",
+    "typescript": "3.5.3",
+    "typescript-tslint-plugin": "^0.5.4"
   },
   "browserslist": {
     "production": [

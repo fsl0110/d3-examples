@@ -1,22 +1,9 @@
-import React, {
-  FC,
-  HTMLAttributes,
-  ReactNode,
-  useEffect,
-  useReducer
-} from "react";
+import React, {FC, HTMLAttributes, ReactNode, useEffect, useReducer} from "react";
 import * as d3 from "d3";
-import {
-  initialState,
-  chartReducer,
-  Dimension,
-  Margin,
-  Data,
-  Scale
-} from "../../store";
+import {initialState, chartReducer, Dimension, Margin, Data, Scale} from "../../store";
 import Context from "../../store/context";
-import { StyledDiv, StyleProps } from "./styles";
-import { useFetch } from "../../hooks";
+import {StyledDiv, StyleProps} from "./styles";
+import {useFetch} from "../../hooks";
 
 interface ChartProps extends StyleProps, HTMLAttributes<HTMLDivElement> {
   /** Define x scale for your Chart */
@@ -100,31 +87,31 @@ export const Chart: FC<ChartProps> = ({
         .range([0, dimension!.width - state.margin.right]);
     }
 
-    scaleToStore = { x, y };
+    scaleToStore = {x, y};
   }
 
   useEffect(() => {
-    dataToStore && dispatch({ type: "SET_DATA", payload: dataToStore });
+    dataToStore && dispatch({type: "SET_DATA", payload: dataToStore});
   }, [dataToStore]);
 
   useEffect(() => {
-    dimension && dispatch({ type: "SET_DIMENSION", dimension });
+    dimension && dispatch({type: "SET_DIMENSION", dimension});
   }, [dimension]);
 
   useEffect(() => {
-    margin && dispatch({ type: "SET_MARGIN", margin });
+    margin && dispatch({type: "SET_MARGIN", margin});
   }, [margin]);
 
   useEffect(() => {
-    scaleToStore && dispatch({ type: "SET_SCALE", scale: scaleToStore });
+    scaleToStore && dispatch({type: "SET_SCALE", scale: scaleToStore});
   }, [scaleToStore]);
 
   useEffect(() => {
-    loadingState && dispatch({ type: "SET_LOADING", isLoading: loadingState });
+    loadingState && dispatch({type: "SET_LOADING", isLoading: loadingState});
   }, [loadingState]);
 
   useEffect(() => {
-    errorState && dispatch({ type: "SET_ERROR", hasError: errorState });
+    errorState && dispatch({type: "SET_ERROR", hasError: errorState});
   }, [errorState]);
 
   if (!state.data.length) {
@@ -132,15 +119,10 @@ export const Chart: FC<ChartProps> = ({
   }
 
   return (
-    <Context.Provider value={{ state, dispatch }}>
+    <Context.Provider value={{state, dispatch}}>
       <StyledDiv {...rest}>
-        <svg
-          width={state.dimension.width + 40}
-          height={state.dimension.height + 40}
-        >
-          <g transform={`translate(${state.margin.left}, ${state.margin.top})`}>
-            {children}
-          </g>
+        <svg width={state.dimension.width + 40} height={state.dimension.height + 40}>
+          <g transform={`translate(${state.margin.left}, ${state.margin.top})`}>{children}</g>
         </svg>
       </StyledDiv>
     </Context.Provider>

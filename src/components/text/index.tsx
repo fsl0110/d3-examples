@@ -1,6 +1,6 @@
-import React, { FC, SVGAttributes } from "react";
+import React, {FC, SVGAttributes} from "react";
 import classNames from "classnames";
-import { StyledDiv, StyleProps } from "./styles";
+import {StyledDiv, StyleProps} from "./styles";
 
 interface Props extends StyleProps {
   children?: string;
@@ -8,15 +8,7 @@ interface Props extends StyleProps {
 
 export type TextProps = Props & SVGAttributes<SVGTextElement>;
 
-export const Text: FC<TextProps> = ({
-  color = "#555",
-  family,
-  size,
-  weight,
-  letterSpacing,
-  className,
-  children
-}) => {
+export const Text: FC<TextProps> = ({color = "#555", family, size, weight, letterSpacing, className, children}) => {
   return (
     <foreignObject>
       <StyledDiv

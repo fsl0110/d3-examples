@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 
 const getSize = (client: boolean) => {
   return {
     width: client ? window.innerWidth : undefined,
-    height: client ? window.innerHeight : undefined
+    height: client ? window.innerHeight : undefined,
   };
 };
 

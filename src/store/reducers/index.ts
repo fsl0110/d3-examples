@@ -1,6 +1,6 @@
-import { Reducer } from "react";
+import {Reducer} from "react";
 import produce from "immer";
-import { initialState, AppState } from "..";
+import {initialState, AppState} from "..";
 import {
   ActionTypes,
   SET_LOADING,
@@ -9,7 +9,7 @@ import {
   SET_SCALE,
   SET_DIMENSION,
   SET_MARGIN,
-  SET_TOOLTIP
+  SET_TOOLTIP,
 } from "../actions";
 
 export const chartReducer: Reducer<AppState, ActionTypes> = produce(
@@ -39,5 +39,5 @@ export const chartReducer: Reducer<AppState, ActionTypes> = produce(
       default:
         return draft;
     }
-  }
+  },
 );

@@ -1,18 +1,18 @@
-import React, { FC, useRef, useEffect, SVGAttributes } from "react";
+import React, {FC, useRef, useEffect, SVGAttributes} from "react";
 import classNames from "classnames";
 import * as d3 from "d3";
-import { Data } from "../../store";
-import { useStore } from "../../hooks";
+import {Data} from "../../store";
+import {useStore} from "../../hooks";
 
 export interface BarProps extends SVGAttributes<SVGGElement> {
   /** No Childrens allowed */
   children?: never;
 }
 
-export const Bar: FC<BarProps> = ({ ...rest }) => {
+export const Bar: FC<BarProps> = ({...rest}) => {
   const el = useRef<SVGGElement>(null);
   const {
-    state: { data, dimension, margin, scale }
+    state: {data, dimension, margin, scale},
   } = useStore();
 
   useEffect(() => {
@@ -29,10 +29,7 @@ export const Bar: FC<BarProps> = ({ ...rest }) => {
       .duration(300)
       .ease(d3.easePolyInOut)
       .attr("y", (d: Data) => scale.y(d[1]))
-      .attr(
-        "height",
-        (d: Data) => dimension.height - scale.y(d[1]) - margin.bottom
-      );
+      .attr("height", (d: Data) => dimension.height - scale.y(d[1]) - margin.bottom);
 
     d3.select(el.current)
       .selectAll("text")

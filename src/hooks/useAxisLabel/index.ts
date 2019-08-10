@@ -1,10 +1,6 @@
-import { Dimension, Margin, AxisLabelAlign } from "../../store";
+import {Dimension, Margin, AxisLabelAlign} from "../../store";
 
-export function useAxisLabel(
-  align: AxisLabelAlign,
-  dimension: Dimension,
-  margin: Margin
-) {
+export function useAxisLabel(align: AxisLabelAlign, dimension: Dimension, margin: Margin) {
   let transform: string;
   let textAnchor: string;
 
@@ -26,8 +22,7 @@ export function useAxisLabel(
       textAnchor = "middle";
       break;
     case "verticalBottom":
-      transform = `translate(${-60}, ${dimension.height -
-        margin.bottom}) rotate(-90)`;
+      transform = `translate(${-60}, ${dimension.height - margin.bottom}) rotate(-90)`;
       textAnchor = "start";
       break;
     case "horizontalLeft":

@@ -1,9 +1,9 @@
-import React, { FC, useEffect, useRef, SVGAttributes, ReactNode } from "react";
+import React, {FC, useEffect, useRef, SVGAttributes, ReactNode} from "react";
 import * as d3 from "d3";
 import classNames from "classnames";
-import { StyledAxisG, StyleProps } from "./styles";
-import { useAxis, useStore } from "../../hooks";
-import { AxisAlign } from "../../store";
+import {StyledAxisG, StyleProps} from "./styles";
+import {useAxis, useStore} from "../../hooks";
+import {AxisAlign} from "../../store";
 
 export interface AxisProps extends StyleProps, SVGAttributes<SVGGElement> {
   /** Alignment of the Axis and Ticks. */
@@ -94,7 +94,7 @@ export const Axis: FC<AxisProps> = ({
 }) => {
   const el = useRef<SVGGElement>(null);
   const {
-    state: { scale, dimension, margin }
+    state: {scale, dimension, margin},
   } = useStore();
   const [transform, currentScale] = useAxis(align, scale, dimension, margin);
 

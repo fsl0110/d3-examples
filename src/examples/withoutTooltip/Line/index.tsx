@@ -1,17 +1,7 @@
-import React, { FC } from "react";
+import React, {FC} from "react";
 import styled from "styled-components";
-import { axiosOpenFDA, openFDA } from "../../../data/rest/openFDA";
-import {
-  Chart,
-  DrawZone,
-  Line,
-  Axis,
-  Marker,
-  Area,
-  Cross,
-  Tooltip,
-  Values
-} from "../../../components";
+import {axiosOpenFDA, openFDA} from "../../../data/rest/openFDA";
+import {Chart, DrawZone, Line, Axis, Marker, Area, Cross, Tooltip, Values} from "../../../components";
 
 const StyledDiv = styled.div`
   width: 100%;
@@ -30,7 +20,7 @@ export const Line1: FC = () => {
         fetch={axiosOpenFDA(openFDA.foodEnforcementReports(""))}
         scaleX="scaleTime"
         scaleY="scaleLinear"
-        dimension={{ width: 760, height: 460 }}
+        dimension={{width: 760, height: 460}}
       >
         <DrawZone>
           <Line />

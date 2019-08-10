@@ -1,7 +1,7 @@
-import React, { FC, SVGAttributes } from "react";
+import React, {FC, SVGAttributes} from "react";
 import classNames from "classnames";
-import { Item } from "../../store";
-import { useStore } from "../../hooks";
+import {Item} from "../../store";
+import {useStore} from "../../hooks";
 
 export interface MarkerProps extends SVGAttributes<SVGGElement> {
   /** Define a radius for the circle.
@@ -31,15 +31,9 @@ export interface MarkerProps extends SVGAttributes<SVGGElement> {
   children?: never;
 }
 
-export const Marker: FC<MarkerProps> = ({
-  tooltip,
-  radius = 5,
-  color = "red",
-  width = 2,
-  className
-}) => {
+export const Marker: FC<MarkerProps> = ({tooltip, radius = 5, color = "#f00", width = 2, className}) => {
   const {
-    state: { data, scale }
+    state: {data, scale},
   } = useStore();
 
   let dataToMap = tooltip || data;

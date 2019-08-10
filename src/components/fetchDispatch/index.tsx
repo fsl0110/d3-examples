@@ -1,7 +1,7 @@
-import React, { FC } from "react";
-import { useFetch } from "../../hooks";
-import { AxiosPromise } from "axios";
-import { Data } from "../../store";
+import React, {FC} from "react";
+import {useFetch} from "../../hooks";
+import {AxiosPromise} from "axios";
+import {Data} from "../../store";
 
 export interface Props {
   loadingIndicator?: JSX.Element;
@@ -10,12 +10,7 @@ export interface Props {
   children: (data: Data) => JSX.Element;
 }
 
-export const FetchDispatch: FC<Props> = ({
-  children,
-  loadingIndicator,
-  errorIndicator,
-  fetch
-}) => {
+export const FetchDispatch: FC<Props> = ({children, loadingIndicator, errorIndicator, fetch}) => {
   const [data, loading, err] = useFetch({}, fetch);
 
   if (loading) return loadingIndicator || <h1>Loading...</h1>;

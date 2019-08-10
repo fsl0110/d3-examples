@@ -50,22 +50,24 @@ export interface StyleProps {
 export const StyledAxisG = styled.g<StyleProps>`
   /* axis line */
   .domain {
-    stroke: ${props => props.axisColor};
-    stroke-dasharray: ${props => props.axisStyle};
-    stroke-width: ${props => props.axisWidth};
+    stroke: ${(props) => props.axisColor};
+    stroke-dasharray: ${(props) => props.axisStyle};
+    stroke-width: ${(props) => props.axisWidth};
   }
+
   .tick {
     /* tick text color */
     text {
-      stroke: ${props => props.tickTextColor};
-      font-size: ${props => props.tickTextSize}px;
-      font-family: ${props => props.tickTextFamily};
+      stroke: ${(props) => props.tickTextColor};
+      font-size: ${(props) => props.tickTextSize}px;
+      font-family: ${(props) => props.tickTextFamily};
     }
+
     /* tick line color */
     line {
-      stroke: ${props => props.tickColor};
-      stroke-dasharray: ${props => props.tickStyle};
-      stroke-width: ${props => props.tickWidth};
+      stroke: ${(props) => props.tickColor};
+      stroke-dasharray: ${(props) => props.tickStyle};
+      stroke-width: ${(props) => props.tickWidth};
     }
   }
 `;

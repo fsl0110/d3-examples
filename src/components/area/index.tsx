@@ -1,8 +1,8 @@
-import React, { FC, SVGAttributes } from "react";
+import React, {FC, SVGAttributes} from "react";
 import classNames from "classnames";
 import * as d3 from "d3";
-import { Data } from "../../store";
-import { useStore } from "../../hooks";
+import {Data} from "../../store";
+import {useStore} from "../../hooks";
 
 export interface AreaProps extends SVGAttributes<SVGPathElement> {
   /** Define a background color for the area.
@@ -52,7 +52,7 @@ export const Area: FC<AreaProps> = ({
   ...rest
 }) => {
   const {
-    state: { data, scale, dimension, margin }
+    state: {data, scale, dimension, margin},
   } = useStore();
 
   const area = d3

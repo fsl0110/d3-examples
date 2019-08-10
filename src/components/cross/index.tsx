@@ -1,7 +1,7 @@
-import React, { FC, SVGAttributes } from "react";
+import React, {FC, SVGAttributes} from "react";
 import classNames from "classnames";
-import { Item } from "../../store";
-import { useStore } from "../../hooks";
+import {Item} from "../../store";
+import {useStore} from "../../hooks";
 
 export interface CrossProps extends SVGAttributes<SVGGElement> {
   /**
@@ -140,18 +140,12 @@ export const Cross: FC<CrossProps> = ({
   ...rest
 }) => {
   const {
-    state: { data, scale, dimension, margin }
+    state: {data, scale, dimension, margin},
   } = useStore();
 
   let dataToMap = tooltip || data;
 
-  const setXCross = (
-    item: Item,
-    full: boolean,
-    fullX: boolean,
-    cross: number,
-    crossX: number | undefined
-  ) => {
+  const setXCross = (item: Item, full: boolean, fullX: boolean, cross: number, crossX: number | undefined) => {
     if (cross || crossX) {
       return scale.y(item[1]) + 1 - (crossX! || cross!);
     }
@@ -163,13 +157,7 @@ export const Cross: FC<CrossProps> = ({
     return scale.y(item[1]) + 1;
   };
 
-  const setYCross = (
-    item: Item,
-    full: boolean,
-    fullY: boolean,
-    cross: number,
-    crossY: number | undefined
-  ) => {
+  const setYCross = (item: Item, full: boolean, fullY: boolean, cross: number, crossY: number | undefined) => {
     if (cross || crossY) {
       return scale.x(item[0]) + (crossY || cross);
     }

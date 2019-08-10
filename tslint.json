@@ -1,0 +1,6 @@
+{
+  "extends": "./tslint",
+  "linterOptions": {
+    "exclude": ["node_modules/**/*", "*.d.ts"]
+  }
+}

@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { AxiosResponse, AxiosError, AxiosPromise } from "axios";
+import {useEffect, useState} from "react";
+import {AxiosResponse, AxiosError, AxiosPromise} from "axios";
 
 export const useFetch = (initialValue: any, fetch: AxiosPromise) => {
   const [loading, setLoading] = useState(false);

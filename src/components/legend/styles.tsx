@@ -16,10 +16,7 @@ export const StyledDiv = styled.div<StyleProps>`
   .legend__decorator {
     width: 10px;
     height: 10px;
-    background-color: red;
+    background-color: #f00;
     margin-right: 5px;
-  }
-
-  .legend__text {
   }
 `;

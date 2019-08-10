@@ -1,7 +1,7 @@
-import React, { FC, SVGAttributes, ReactNode } from "react";
+import React, {FC, SVGAttributes, ReactNode} from "react";
 import * as d3 from "d3";
-import { Data } from "../../store";
-import { useStore } from "../../hooks";
+import {Data} from "../../store";
+import {useStore} from "../../hooks";
 
 export interface LineProps extends SVGAttributes<SVGGElement> {
   /**
@@ -49,7 +49,7 @@ export const Line: FC<LineProps> = ({
   ...rest
 }) => {
   const {
-    state: { scale, data }
+    state: {scale, data},
   } = useStore();
 
   const lineGenerator = d3

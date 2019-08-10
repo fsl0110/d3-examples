@@ -1,7 +1,7 @@
 /* import { axiosOpenFDA, openFDA } from "../../data/rest/openFDA";
 import { Dispatch } from "redux";
 import { AxiosResponse, AxiosError } from "axios"; */
-import { Dimension, Margin, Scale, Tooltip } from "..";
+import {Dimension, Margin, Scale, Tooltip} from "..";
 
 export const SET_LOADING = "SET_LOADING";
 export const SET_ERROR = "SET_ERROR";
@@ -11,14 +11,7 @@ export const SET_DIMENSION = "SET_DIMENSION";
 export const SET_MARGIN = "SET_MARGIN";
 export const SET_TOOLTIP = "SET_TOOLTIP";
 
-export type ActionTypes =
-  | SetLoading
-  | SetError
-  | SetData
-  | SetScale
-  | SetDimension
-  | SetMargin
-  | SetTooltip;
+export type ActionTypes = SetLoading | SetError | SetData | SetScale | SetDimension | SetMargin | SetTooltip;
 
 export interface SetDimension {
   type: typeof SET_DIMENSION;
@@ -28,7 +21,7 @@ export interface SetDimension {
 export const setDimension = (dimension: Dimension): SetDimension => {
   return {
     type: SET_DIMENSION,
-    dimension
+    dimension,
   };
 };
 
@@ -40,7 +33,7 @@ export interface SetScale {
 export const setScale = (scale: Scale): SetScale => {
   return {
     type: SET_SCALE,
-    scale
+    scale,
   };
 };
 
@@ -52,7 +45,7 @@ export interface SetMargin {
 export const setMargin = (margin: Margin): SetMargin => {
   return {
     type: SET_MARGIN,
-    margin
+    margin,
   };
 };
 
@@ -64,7 +57,7 @@ export interface SetTooltip {
 export const setTooltip = (value: Tooltip): SetTooltip => {
   return {
     type: SET_TOOLTIP,
-    value
+    value,
   };
 };
 
@@ -76,7 +69,7 @@ export interface SetData {
 export const setData = (payload: Array<(string | number)[]>): SetData => {
   return {
     type: SET_DATA,
-    payload
+    payload,
   };
 };
 
@@ -88,7 +81,7 @@ export interface SetLoading {
 export const setLoading = (isLoading: boolean): SetLoading => {
   return {
     type: SET_LOADING,
-    isLoading
+    isLoading,
   };
 };
 
@@ -100,7 +93,7 @@ export interface SetError {
 export const setError = (hasError: boolean): SetError => {
   return {
     type: SET_ERROR,
-    hasError
+    hasError,
   };
 };
 

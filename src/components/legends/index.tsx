@@ -1,7 +1,7 @@
-import React, { FC, SVGAttributes, ReactNode } from "react";
+import React, {FC, SVGAttributes, ReactNode} from "react";
 import classNames from "classnames";
-import { useStore } from "../../hooks";
-import { StyledDiv } from "./styles";
+import {useStore} from "../../hooks";
+import {StyledDiv} from "./styles";
 
 export interface LegendsProps extends SVGAttributes<SVGGElement> {
   /** Define the position of the legend. */
@@ -20,17 +20,15 @@ export interface LegendsProps extends SVGAttributes<SVGGElement> {
   children: ReactNode | ReactNode[];
 }
 
-export const Legends: FC<LegendsProps> = ({ className, children, ...rest }) => {
+export const Legends: FC<LegendsProps> = ({className, children, ...rest}) => {
   const {
-    state: { dimension }
+    state: {dimension},
   } = useStore();
 
   return (
     <g transform={`translate(${0}, ${dimension.height})`} {...rest}>
       <foreignObject>
-        <StyledDiv className={classNames("legends", className)}>
-          {children}
-        </StyledDiv>
+        <StyledDiv className={classNames("legends", className)}>{children}</StyledDiv>
       </foreignObject>
     </g>
   );

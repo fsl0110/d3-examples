@@ -5,18 +5,18 @@ export const initialState: AppState = {
   isLoading: false,
   hasError: false,
   data: [],
-  scale: { x: null, y: null },
+  scale: {x: null, y: null},
   margin: {
     top: 20,
     left: 20,
     bottom: 20,
-    right: 20
+    right: 20,
   },
   dimension: {
     height: 400,
-    width: 600
+    width: 600,
   },
-  tooltip: []
+  tooltip: [],
 };
 
 export interface AppState {
@@ -33,7 +33,7 @@ export type Tooltip = [];
 
 export type Data = any;
 
-export type Scale = { x: any; y: any };
+export type Scale = {x: any; y: any};
 
 export type Dimension = {
   width: number;

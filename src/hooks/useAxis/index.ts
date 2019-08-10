@@ -1,11 +1,6 @@
-import { AxisAlign, Scale, Dimension, Margin } from "../../store";
+import {AxisAlign, Scale, Dimension, Margin} from "../../store";
 
-export function useAxis(
-  align: AxisAlign,
-  scale: Scale,
-  dimension: Dimension,
-  margin: Margin
-) {
+export function useAxis(align: AxisAlign, scale: Scale, dimension: Dimension, margin: Margin) {
   let transform: string = "";
   let currentScale: any;
 
@@ -15,8 +10,7 @@ export function useAxis(
       currentScale = scale.y;
       break;
     case "axisBottom":
-      transform = `translate(${margin.left}, ${dimension.height -
-        margin.bottom})`;
+      transform = `translate(${margin.left}, ${dimension.height - margin.bottom})`;
       currentScale = scale.x;
       break;
     case "axisRight":
