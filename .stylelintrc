@@ -1,0 +1,9 @@
+{
+  "processors": ["stylelint-processor-styled-components"],
+  "plugins": ["stylelint-prettier"],
+  "extends": "./stylelint",
+  "rules": {
+    "prettier/prettier": true,
+    "no-empty-source": null
+  }
+}

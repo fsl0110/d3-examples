@@ -12,7 +12,7 @@ Starts React-Styleguidist on Port 6060
 
 Build React-Styleguidist to folder ./styleguide
 
-### `yarn styleguide:build:run` or `npm run styleguide:build:run`
+### `yarn styleguide:build:serve` or `npm run styleguide:build:serve`
 
 Build React-Styleguidist to folder src/styleguide an runs it on Port 5000
 
@@ -39,6 +39,6 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run build:run` or `yarn build:run`
+### `npm run build:serve` or `yarn build:serve`
 
 Builds the app for production to the `build` folder and runs it on Port 5000.<br>

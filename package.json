@@ -12,12 +12,13 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "build:run": "yarn build && serve ./build",
+    "build:serve": "yarn build && serve ./build",
     "serve": "serve ./build",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "styleguide": "yarn styleguidist server",
     "styleguide:build": "yarn styleguidist build",
-    "styleguide:build:run": "yarn styleguidist build && serve ./styleguide",
+    "styleguide:build:serve": "yarn styleguidist build && serve ./styleguide",
+    "lint": "stylelint src/**/*.scss",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -34,7 +35,6 @@
     "moment": "^2.24.0",
     "normalize-scss": "^7.0.1",
     "react": "^16.8.6",
-    "react-docgen-typescript": "^1.12.5",
     "react-dom": "^16.8.6",
     "react-spring": "^8.0.27",
     "styled-components": "^4.3.2"
@@ -58,15 +58,18 @@
     "enzyme-to-json": "^3.3.5",
     "moxios": "^0.4.0",
     "node-sass": "^4.12.0",
+    "prettier": "^1.18.2",
     "react-docgen-typescript": "^1.12.5",
     "react-scripts": "3.0.1",
     "react-styleguidist": "^9.1.11",
     "serve": "^11.1.0",
     "source-map-explorer": "^2.0.1",
+    "stylelint": "^10.1.0",
+    "stylelint-order": "^3.0.1",
+    "stylelint-prettier": "^1.1.1",
+    "stylelint-processor-styled-components": "^1.8.0",
+    "stylelint-scss": "^3.9.3",
     "typescript": "3.5.3"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   },
   "browserslist": {
     "production": [
