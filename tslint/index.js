@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
 module.exports = {
-  extends: ['./configs/core', './configs/react', './configs/sonar'],
+  extends: ["./configs/core", "./configs/react", "./configs/sonar"],
   linterOptions: {
-    exclude: ['node_modules/**'],
+    exclude: ["node_modules/**"],
   },
 };

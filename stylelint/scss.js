@@ -1,3 +1,3 @@
-'use strict';
+"use strict";
 
-module.exports = require('./configs/scss');
+module.exports = require("./configs/scss");

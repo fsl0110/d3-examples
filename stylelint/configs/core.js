@@ -13,8 +13,8 @@ module.exports = {
     "declaration-block-no-duplicate-properties": [
       ON,
       {
-        ignore: ["consecutive-duplicates"]
-      }
+        ignore: ["consecutive-duplicates"],
+      },
     ],
     "declaration-block-no-shorthand-property-overrides": ON,
     "font-family-no-duplicate-names": ON,
@@ -55,7 +55,7 @@ module.exports = {
       "/^transition/": ["/all/"],
       "/^background/": ["http:", "https:"],
       "/^border/": ["none"],
-      "/.+/": ["initial"]
+      "/.+/": ["initial"],
     },
     "declaration-property-value-blacklist": OFF,
     "declaration-property-value-whitelist": OFF,
@@ -124,8 +124,8 @@ module.exports = {
       "always",
       {
         except: ["first-nested"],
-        ignore: ["stylelint-commands"]
-      }
+        ignore: ["stylelint-commands"],
+      },
     ],
     "comment-whitespace-inside": "always",
     "custom-property-empty-line-before": OFF,
@@ -175,8 +175,8 @@ module.exports = {
       "always-multi-line",
       {
         except: ["first-nested"],
-        ignore: ["after-comment"]
-      }
+        ignore: ["after-comment"],
+      },
     ],
     "selector-attribute-brackets-space-inside": "never",
     "selector-attribute-operator-space-after": "never",
@@ -201,6 +201,6 @@ module.exports = {
     "value-list-comma-newline-before": OFF,
     "value-list-comma-space-after": "always-single-line",
     "value-list-comma-space-before": "never",
-    "value-list-max-empty-lines": OFF
-  }
+    "value-list-max-empty-lines": OFF,
+  },
 };

@@ -1,38 +1,38 @@
-'use strict';
+"use strict";
 
 const ON = true;
 const OFF = null;
 
 module.exports = {
-  plugins: 'stylelint-order',
+  plugins: "stylelint-order",
   rules: {
     // All
-    'order/order': [
+    "order/order": [
       [
-        'custom-properties',
-        'dollar-variables',
+        "custom-properties",
+        "dollar-variables",
         {
-          type: 'at-rule',
-          name: 'extend',
+          type: "at-rule",
+          name: "extend",
         },
         {
-          type: 'at-rule',
-          name: 'mixin',
+          type: "at-rule",
+          name: "mixin",
         },
-        'declarations',
+        "declarations",
         {
-          type: 'at-rule',
-          name: 'include',
+          type: "at-rule",
+          name: "include",
         },
         {
-          type: 'rule',
+          type: "rule",
           selector: /^&:[\w-]+$/,
         },
         {
-          type: 'rule',
+          type: "rule",
           selector: /^&::[\w-]+$/,
         },
-        'rules',
+        "rules",
       ],
     ] /* 
     'order/properties-order': [
@@ -206,6 +206,6 @@ module.exports = {
       'animation-iteration-count',
       'animation-direction',
     ], */,
-    'order/properties-alphabetical-order': OFF,
+    "order/properties-alphabetical-order": OFF,
   },
 };
