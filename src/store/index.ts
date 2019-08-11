@@ -33,6 +33,16 @@ export type Tooltip = [];
 
 export type Data = any;
 
+export type Curves =
+  | "curveLinear"
+  | "curveStep"
+  | "curveStepBefore"
+  | "curveStepAfter"
+  | "curveBasis"
+  | "curveCardinal"
+  | "curveMonotoneX"
+  | "curveCatmullRom";
+
 export type Scale = {x: any; y: any};
 
 export type Dimension = {

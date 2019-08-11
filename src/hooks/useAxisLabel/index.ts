@@ -32,6 +32,7 @@ export function useAxisLabel(align: AxisLabelAlign, dimension: Dimension, margin
     default:
       transform = "";
       textAnchor = "";
+      break;
   }
 
   return [transform, textAnchor];

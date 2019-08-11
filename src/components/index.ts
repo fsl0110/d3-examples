@@ -1,4 +1,3 @@
-export {FetchDispatch} from "./fetchDispatch";
 export * from "./area";
 export * from "./axis";
 export * from "./axisLabel";

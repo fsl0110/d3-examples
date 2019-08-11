@@ -31,11 +31,11 @@ export const openFDA = {
         moment(item.time, "YYYYMMDD").format("YYYY"),
       );
 
-      const countedByYears = Object.entries(groupedByYears).map((entry: any) => {
-        return [entry[0], _.sumBy(entry[1], (item: {time: string; count: number}) => item.count)];
-      });
-
-      return countedByYears;
+      // countedByYears
+      return Object.entries(groupedByYears).map((entry: any) => [
+        entry[0],
+        _.sumBy(entry[1], (item: {time: string; count: number}) => item.count),
+      ]);
     },
   }),
   foodEnforcementInitiators: (): AxiosRequestConfig => ({

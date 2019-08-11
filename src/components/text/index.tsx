@@ -8,19 +8,17 @@ interface Props extends StyleProps {
 
 export type TextProps = Props & SVGAttributes<SVGTextElement>;
 
-export const Text: FC<TextProps> = ({color = "#555", family, size, weight, letterSpacing, className, children}) => {
-  return (
-    <foreignObject>
-      <StyledDiv
-        className={classNames("text", className)}
-        color={color}
-        family={family}
-        size={size}
-        weight={weight}
-        letterSpacing={letterSpacing}
-      >
-        {children}
-      </StyledDiv>
-    </foreignObject>
-  );
-};
+export const Text: FC<TextProps> = ({color = "#555", family, size, weight, letterSpacing, className, children}) => (
+  <foreignObject>
+    <StyledDiv
+      className={classNames("text", className)}
+      color={color}
+      family={family}
+      size={size}
+      weight={weight}
+      letterSpacing={letterSpacing}
+    >
+      {children}
+    </StyledDiv>
+  </foreignObject>
+);

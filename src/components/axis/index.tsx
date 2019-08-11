@@ -9,56 +9,66 @@ export interface AxisProps extends StyleProps, SVGAttributes<SVGGElement> {
   /** Alignment of the Axis and Ticks. */
   align: AxisAlign;
 
-  /** Wether to show the axis line.
+  /**
+   * Wether to show the axis line.
    * @default false
    */
   hideAxisLine?: boolean;
 
   // TODO: fix the issue with passing strings.
-  /** Define the amount of tick shown on the axis.
+  /**
+   * Define the amount of tick shown on the axis.
    * @default undefined
    */
   ticks?: number;
 
   // TODO: Not working. Fix this issue.
-  /** Define inividual tick values shown on the axis.
+  /**
+   * Define inividual tick values shown on the axis.
    * @default undefined
    */
   tickValues?: [];
 
   // TODO: check this out or remove it.
-  /** Define inividual tick arguments.
+  /**
+   * Define inividual tick arguments.
    * @default undefined
    */
   tickArguments?: [];
 
   // TODO: test this.
-  /** Define inividual tick format.
+  /**
+   * Define inividual tick format.
    * @default undefined
    */
   tickFormat?: Function;
 
-  /** Define a size for the ticks.
+  /**
+   * Define a size for the ticks.
    * @default undefined
    */
   tickSize?: number;
 
-  /** Define a size for the inner ticks.
+  /**
+   * Define a size for the inner ticks.
    * @default undefined
    */
   tickSizeInner?: number;
 
-  /** Define a size for the outer ticks.
+  /**
+   * Define a size for the outer ticks.
    * @default undefined
    */
   tickSizeOuter?: number;
 
-  /** Define a padding between tick line and tick text.
+  /**
+   * Define a padding between tick line and tick text.
    * @default undefined
    */
   tickPadding?: number;
 
-  /** Define a individual position for the tick text.
+  /**
+   * Define a individual position for the tick text.
    * @default undefined
    */
   tickTextPosition?: [number, number];

@@ -4,13 +4,15 @@ import {Item} from "../../store";
 import {useStore} from "../../hooks";
 
 export interface MarkerProps extends SVGAttributes<SVGGElement> {
-  /** Define a radius for the circle.
+  /**
+   * Define a radius for the circle.
    * If 0 no circle will be shown.
    * @default 5
    */
   radius?: number; // TODO: implement
 
-  /** Define a stroke as color for the circle.
+  /**
+   * Define a stroke as color for the circle.
    * @default red
    */
   color?: string; // TODO: implement
@@ -22,7 +24,8 @@ export interface MarkerProps extends SVGAttributes<SVGGElement> {
    */
   width?: number; // TODO: implement
 
-  /** Map tooltip instead of datas when Tooltip Component is parent of this component.
+  /**
+   * Map tooltip instead of datas when Tooltip Component is parent of this component.
    * Tooltip values comes automatically from the parent Tooltip Component via cloneElement.
    */
   tooltip?: Item;
@@ -36,7 +39,7 @@ export const Marker: FC<MarkerProps> = ({tooltip, radius = 5, color = "#f00", wi
     state: {data, scale},
   } = useStore();
 
-  let dataToMap = tooltip || data;
+  const dataToMap = tooltip || data;
 
   return (
     <g className={classNames("marker", className)}>

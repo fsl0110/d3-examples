@@ -11,13 +11,13 @@ export interface CrossProps extends SVGAttributes<SVGGElement> {
   hide?: boolean;
 
   /**
-   *Wether to hide Y-Cross-Line.
+   * Wether to hide Y-Cross-Line.
    * @default undefined
    */
   hideY?: boolean;
 
   /**
-   *Wether to hide X-Cross-Line.
+   * Wether to hide X-Cross-Line.
    * @default undefined
    */
   hideX?: boolean;
@@ -55,59 +55,66 @@ export interface CrossProps extends SVGAttributes<SVGGElement> {
   /**
    * Define a stroke as color for the Y-Cross-Line.
    * @default undefined
-   * */
+   */
   colorY?: string;
 
   /**
    * Define a stroke-width e.g 3 as width for the Cross-Lines.
    * @default 1
-   * */
+   */
   width?: number;
 
   /**
    * Define a stroke-width e.g 3 as width for the X-Cross-Line.
    * @default undefined
-   * */
+   */
   widthX?: number;
 
   /**
    * Define a stroke-width e.g 3 as width for the Y-Cross-Line.
    * @default undefined
-   * */
+   */
   widthY?: number;
 
-  /** Define a stroke-dasharray to style the Cross-Lines.
+  /**
+   * Define a stroke-dasharray to style the Cross-Lines.
    * @default 10
    */
   dash?: number;
 
-  /** Define a stroke-dasharray to style the X-Cross-Line.
+  /**
+   * Define a stroke-dasharray to style the X-Cross-Line.
    * @default undefined
    */
   dashX?: number;
 
-  /** Define a stroke-dasharray to style the Y-Cross-Line.
+  /**
+   * Define a stroke-dasharray to style the Y-Cross-Line.
    * @default undefined
    */
   dashY?: number;
 
-  /** Wether the Cross-Lines should have overlength to appear as a cross.
+  /**
+   * Wether the Cross-Lines should have overlength to appear as a cross.
    * The value e.g. 10 defines the overlength.
    * @default undefined
    */
   cross?: number;
 
-  /** Wether the X-Cross-Line should have overlength.
+  /**
+   * Wether the X-Cross-Line should have overlength.
    * @default undefined
    */
   crossX?: number;
 
-  /** Wether the Y-Cross-Line should have overlength.
+  /**
+   * Wether the Y-Cross-Line should have overlength.
    * @default undefined
    */
   crossY?: number;
 
-  /** Map tooltip instead of datas when Tooltip Component is parent of this component.
+  /**
+   * Map tooltip instead of datas when Tooltip Component is parent of this component.
    * Tooltip values comes automatically from the parent Tooltip Component via cloneElement.
    */
   tooltip?: Item;
@@ -143,7 +150,7 @@ export const Cross: FC<CrossProps> = ({
     state: {data, scale, dimension, margin},
   } = useStore();
 
-  let dataToMap = tooltip || data;
+  const dataToMap = tooltip || data;
 
   const setXCross = (item: Item, full: boolean, fullX: boolean, cross: number, crossX: number | undefined) => {
     if (cross || crossX) {

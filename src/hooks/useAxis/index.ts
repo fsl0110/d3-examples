@@ -23,6 +23,8 @@ export function useAxis(align: AxisAlign, scale: Scale, dimension: Dimension, ma
       transform = `translate(${0}, ${0})`;
       currentScale = scale.x;
       break;
+    default:
+      break;
   }
   return [transform, currentScale];
 }

@@ -5,7 +5,8 @@ import {useStore} from "../../hooks";
 import {StyledText, StyleProps} from "./styles";
 
 interface Props extends SVGAttributes<SVGGElement> {
-  /** Map tooltip instead of datas when Tooltip Component is parent of this component.
+  /**
+   * Map tooltip instead of datas when Tooltip Component is parent of this component.
    * Tooltip values comes automatically from the parent Tooltip Component via cloneElement.
    */
   tooltip?: Item;
@@ -20,17 +21,15 @@ export const Values: FC<ValuesProps> = ({tooltip, className}) => {
     state: {data, scale},
   } = useStore();
 
-  let dataToMap = tooltip || data;
+  const dataToMap = tooltip || data;
 
   return (
     <g className={classNames("values", className)}>
-      {dataToMap.map((item: Data, i: number) => {
-        return (
-          <StyledText className="value" key={i} x={scale.x(item[0])} y={scale.y(item[1]) - 15} textAnchor="middle">
-            {item[1]}
-          </StyledText>
-        );
-      })}
+      {dataToMap.map((item: Data, i: number) => (
+        <StyledText className="value" key={i} x={scale.x(item[0])} y={scale.y(item[1]) - 15} textAnchor="middle">
+          {item[1]}
+        </StyledText>
+      ))}
     </g>
   );
 };

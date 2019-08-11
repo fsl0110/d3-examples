@@ -6,12 +6,6 @@ export const useFetch = (initialValue: any, fetch: AxiosPromise) => {
   const [error, setError] = useState(false);
   const [data, setData] = useState(initialValue);
 
-  /** If fetch is not used return undefined */
-  /* 
-  if (!fetch) {
-    return [undefined, undefined, undefined];
-  } */
-
   useEffect(() => {
     setLoading(true);
     fetch
@@ -22,7 +16,6 @@ export const useFetch = (initialValue: any, fetch: AxiosPromise) => {
       .catch((err: AxiosError) => {
         setLoading(false);
         setError(true);
-        console.error(err);
       });
   }, [fetch]);
 

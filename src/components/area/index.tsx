@@ -1,42 +1,39 @@
 import React, {FC, SVGAttributes} from "react";
 import classNames from "classnames";
 import * as d3 from "d3";
-import {Data} from "../../store";
+import {Data, Curves} from "../../store";
 import {useStore} from "../../hooks";
 
 export interface AreaProps extends SVGAttributes<SVGPathElement> {
-  /** Define a background color for the area.
+  /**
+   * Define a background color for the area.
    * @efault aqua
    */
   color?: string;
 
-  /** Define a opacity for the background color of the area.
+  /**
+   * Define a opacity for the background color of the area.
    * @default 0.3
    */
   opacity?: number;
 
-  /** Define a stroke color for the area.
+  /**
+   * Define a stroke color for the area.
    * @default aqua
    */
   strokeColor?: string;
 
-  /** Define a stroke width for the area.
+  /**
+   * Define a stroke width for the area.
    * @default 0
    */
   strokeWidth?: number;
 
-  /** Define a type for the area.
+  /**
+   * Define a type for the area.
    * @default curveMonotoneX
    */
-  type?:
-    | "curveLinear"
-    | "curveStep"
-    | "curveStepBefore"
-    | "curveStepAfter"
-    | "curveBasis"
-    | "curveCardinal"
-    | "curveMonotoneX"
-    | "curveCatmullRom";
+  type?: Curves;
 
   /** No Childrens allowed */
   children?: never;

@@ -1,6 +1,6 @@
 import React, {FC, HTMLAttributes, ReactNode, useEffect, useReducer} from "react";
 import * as d3 from "d3";
-import {initialState, chartReducer, Dimension, Margin, Data, Scale} from "../../store";
+import {initialState, chartReducer, Dimension, Margin, Data} from "../../store";
 import Context from "../../store/context";
 import {StyledDiv, StyleProps} from "./styles";
 import {useFetch} from "../../hooks";
@@ -46,19 +46,15 @@ export const Chart: FC<ChartProps> = ({
   children,
   ...rest
 }) => {
-  /* const [ref, size] = useComponentSize(); */
   const [fetchedData, loading, error] = useFetch({}, fetch);
   const [state, dispatch] = useReducer(chartReducer, initialState);
 
-  let dataToStore = fetchedData || data;
-  let loadingState = loading || isLoading;
-  let errorState = error || hasError;
+  const dataToStore = fetchedData || data;
+  const loadingState = loading || isLoading;
+  const errorState = error || hasError;
   let scaleToStore: any;
 
-  /*   console.log("chart loadingState", loadingState);
-   */
   if (dataToStore.length) {
-    console.log("chart dataToStore", dataToStore);
     const xMin = Math.min(...dataToStore.map((d: Data) => d[0]));
     const xMax = Math.max(...dataToStore.map((d: Data) => d[0]));
     const yMax = Math.max(...dataToStore.map((d: Data) => d[1]));
@@ -103,15 +99,15 @@ export const Chart: FC<ChartProps> = ({
   }, [margin]);
 
   useEffect(() => {
-    scaleToStore && dispatch({type: "SET_SCALE", scale: scaleToStore});
+    dispatch({type: "SET_SCALE", scale: scaleToStore});
   }, [scaleToStore]);
 
   useEffect(() => {
-    loadingState && dispatch({type: "SET_LOADING", isLoading: loadingState});
+    dispatch({type: "SET_LOADING", isLoading: loadingState});
   }, [loadingState]);
 
   useEffect(() => {
-    errorState && dispatch({type: "SET_ERROR", hasError: errorState});
+    dispatch({type: "SET_ERROR", hasError: errorState});
   }, [errorState]);
 
   if (!state.data.length) {

@@ -12,9 +12,13 @@ export function useComponentSize() {
       // handle resize on load
       window.requestAnimationFrame(() => setComponentSize(node.getBoundingClientRect()));
       // handle resize on window resize
-      const handleResize = () => setComponentSize(node.getBoundingClientRect());
+      const handleResize = () => {
+        setComponentSize(node.getBoundingClientRect());
+      };
       window.addEventListener("resize", handleResize);
-      return () => window.removeEventListener("resize", handleResize);
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
     }
   }, [node]);
 

@@ -13,7 +13,7 @@ export const Tooltip: FC<TooltipProps> = ({children, ...rest}) => {
     dispatch,
   } = useStore();
 
-  let bisectMouseValue = d3.bisector((d: Data) => d[0]).left;
+  const bisectMouseValue = d3.bisector((d: Data) => d[0]).left;
 
   return (
     <g transform={`translate(20,20)`} {...rest}>

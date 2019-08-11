@@ -2,5 +2,9 @@
   "extends": "./tslint",
   "linterOptions": {
     "exclude": ["node_modules/**/*", "*.d.ts"]
+  },
+  "rules": {
+    "no-any": false,
+    "no-shadowed-variable": false
   }
 }

@@ -7,27 +7,25 @@ const StyledDiv = styled.div`
   width: 100%;
 `;
 
-export const LineTooltip: FC = () => {
-  return (
-    <StyledDiv>
-      <Chart
-        fetch={axiosOpenFDA(openFDA.foodEnforcementReports(""))}
-        scaleX="scaleTime"
-        scaleY="scaleLinear"
-        dimension={{width: 760, height: 460}}
-      >
-        <DrawZone>
-          <Line />
-          <Area />
-        </DrawZone>
-        <Tooltip>
-          <Values />
-          <Cross hideY />
-          <Marker />
-        </Tooltip>
-        <Axis align="axisLeft" />
-        <Axis align="axisBottom" />
-      </Chart>
-    </StyledDiv>
-  );
-};
+export const LineTooltip: FC = () => (
+  <StyledDiv>
+    <Chart
+      fetch={axiosOpenFDA(openFDA.foodEnforcementReports(""))}
+      scaleX="scaleTime"
+      scaleY="scaleLinear"
+      dimension={{width: 760, height: 460}}
+    >
+      <DrawZone>
+        <Line />
+        <Area />
+      </DrawZone>
+      <Tooltip>
+        <Values />
+        <Cross hideY={true} />
+        <Marker />
+      </Tooltip>
+      <Axis align="axisLeft" />
+      <Axis align="axisBottom" />
+    </Chart>
+  </StyledDiv>
+);
