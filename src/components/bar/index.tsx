@@ -36,7 +36,7 @@ export const Bar: FC<BarProps> = ({...rest}) => {
       .data(data)
       .enter()
       .append("text")
-      .attr("x", (d: Data) => scale.x(d[0]) + margin.left)
+      .attr("x", (d: Data) => scale.x(d[0]) + margin.left) // tslint:disable-line
       .attr("y", dimension.height - margin.bottom - 5)
       .transition()
       .duration(300)

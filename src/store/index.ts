@@ -48,9 +48,9 @@ export type Positions = "top" | "left" | "bottom" | "right";
 
 export type Scale = {x: XScale; y: YScale};
 
-export type XScale = ScaleTime<number, number> | null;
+export type XScale = any;
 
-export type YScale = ScaleLinear<number, number> | null;
+export type YScale = any;
 
 export type Dimension = {
   width: number;
