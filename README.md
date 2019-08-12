@@ -42,3 +42,15 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ### `npm run build:serve` or `yarn build:serve`
 
 Builds the app for production to the `build` folder and runs it on Port 5000.<br>
+
+### `npm run lint` or `yarn lint`
+
+Execute TSLint with Sonar and Stylelint
+
+### `npm run lint:scripts` or `yarn lint:scripts`
+
+Execute TSLint with Sonar
+
+### `npm run lint:styles` or `yarn lint:styles`
+
+Execute Stylelint
