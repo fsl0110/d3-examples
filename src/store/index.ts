@@ -1,6 +1,6 @@
+import {ScaleTime, ScaleLinear} from "d3";
 export * from "./reducers";
 export * from "./actions";
-import {ScaleTime, ScaleLinear} from "d3";
 
 export const initialState: AppState = {
   isLoading: false,

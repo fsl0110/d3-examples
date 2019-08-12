@@ -54,9 +54,9 @@ export const Area: FC<AreaProps> = ({
 
   const area = d3
     .area()
-    .x((d: Data) => scale.x(d[0]))
+    .x((d: Data) => scale.x!(d[0]))
     .y0(dimension.height - margin.top - margin.bottom)
-    .y1((d: Data) => scale.y(d[1]))
+    .y1((d: Data) => scale.y!(d[1]))
     .curve(d3[type]);
 
   return (
