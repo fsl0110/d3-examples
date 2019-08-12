@@ -10,7 +10,9 @@ export function useComponentSize() {
   useLayoutEffect(() => {
     if (node) {
       // handle resize on load
-      window.requestAnimationFrame(() => setComponentSize(node.getBoundingClientRect()));
+      window.requestAnimationFrame(() => {
+        setComponentSize(node.getBoundingClientRect());
+      });
       // handle resize on window resize
       const handleResize = () => {
         setComponentSize(node.getBoundingClientRect());

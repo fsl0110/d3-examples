@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 import styled from "styled-components";
 import {axiosOpenFDA, openFDA} from "../../../data/rest/openFDA";
-import {Chart, DrawZone, Line, Axis, Area} from "../../../components";
+import {Chart, DrawZone, Line, Axis, Area, Values} from "../../../components";
 
 const StyledDiv = styled.div`
   width: 100%;
@@ -24,6 +24,7 @@ export const Line1: FC = () => (
       <DrawZone>
         <Line />
         <Area />
+        <Values size={20} />
       </DrawZone>
       <Axis align="axisLeft" />
       <Axis align="axisBottom" />

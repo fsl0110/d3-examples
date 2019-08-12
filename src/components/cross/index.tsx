@@ -154,7 +154,7 @@ export const Cross: FC<CrossProps> = ({
 
   const setXCross = (item: Item, full: boolean, fullX: boolean, cross: number, crossX: number | undefined) => {
     if (cross || crossX) {
-      return scale.y(item[1]) + 1 - (crossX! || cross!);
+      return scale.y(item[1]) + 1 - (crossX || cross);
     }
 
     if (full || fullX) {

@@ -1,7 +1,7 @@
 import {AxisAlign, Scale, Dimension, Margin} from "../../store";
 
 export function useAxis(align: AxisAlign, scale: Scale, dimension: Dimension, margin: Margin) {
-  let transform: string = "";
+  let transform = "";
   let currentScale: any;
 
   switch (align) {

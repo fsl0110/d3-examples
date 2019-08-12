@@ -124,9 +124,9 @@ module.exports = {
     "no-unnecessary-class": [ON, "allow-empty-class"],
     "no-unsafe-any": OFF,
     "no-unsafe-finally": ON,
-    "no-unused-expression": ON,
-    "no-unused-variable": OFF,
-    "no-use-before-declare": ON,
+    "no-unused-expression": [ON, "allow-fast-null-checks"],
+    "no-unused-variable": OFF, // deprecated
+    "no-use-before-declare": OFF, // deprecated
     "no-var-keyword": ON,
     "no-void-expression": ON,
     "prefer-conditional-expression": ON,

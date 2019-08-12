@@ -33,10 +33,11 @@ export interface StyleProps {
   letterSpacing?: string;
 }
 
+//tslint:disable
 export const StyledDiv = styled.div<StyleProps>`
   color: ${(props) => props.color};
   font-size: ${(props) => (props.size ? props.size + "px" : "")};
-  font-family: ${(props) => props.family || "sans-serif"};
+  font-family: ${(props) => props.family || "inherit"};
   font-weight: ${(props) => props.weight};
   letter-spacing: ${(props) => props.letterSpacing};
 `;

@@ -20,7 +20,7 @@
     "styleguide:build:serve": "yarn styleguidist build && serve ./styleguide",
     "lint": "yarn lint:scripts && yarn lint:styles",
     "lint:scripts": "tslint -p ./tsconfig.json",
-    "lint:styles": "stylelint src/**/*.scss",
+    "lint:styles": "stylelint src/**/styles.tsx",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

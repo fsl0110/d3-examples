@@ -33,6 +33,7 @@ export interface StyleProps {
   letterSpacing?: string;
 }
 
+//tslint:disable
 export const StyledText = styled.text<StyleProps>`
   color: ${(props) => props.color};
   font-size: ${(props) => (props.size ? props.size + "px" : "")};

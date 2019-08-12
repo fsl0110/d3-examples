@@ -1,11 +1,12 @@
 import React, {FC, SVGAttributes, ReactNode} from "react";
 import classNames from "classnames";
 import {useStore} from "../../hooks";
+import {Positions} from "../../store";
 import {StyledDiv} from "./styles";
 
 export interface LegendsProps extends SVGAttributes<SVGGElement> {
   /** Define the position of the legend. */
-  position?: "top" | "left" | "bottom" | "right";
+  position?: Positions;
 
   /**
    * Wether the legend content should appera inline or vertical.

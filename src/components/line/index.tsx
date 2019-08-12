@@ -1,6 +1,6 @@
-import React, {FC, SVGAttributes, ReactNode} from "react";
+import React, {FC, SVGAttributes} from "react";
 import * as d3 from "d3";
-import {Data} from "../../store";
+import {Data, Curves} from "../../store";
 import {useStore} from "../../hooks";
 
 export interface LineProps extends SVGAttributes<SVGGElement> {
@@ -26,18 +26,10 @@ export interface LineProps extends SVGAttributes<SVGGElement> {
    * Define a type for the line
    * @default curveMonotoneX
    */
-  lineType?:
-    | "curveLinear"
-    | "curveStep"
-    | "curveStepBefore"
-    | "curveStepAfter"
-    | "curveBasis"
-    | "curveCardinal"
-    | "curveMonotoneX"
-    | "curveCatmullRom";
+  lineType?: Curves;
 
-  /** */
-  children?: ReactNode | ReactNode[];
+  /** Childrens are not allowed */
+  children?: never;
 }
 
 export const Line: FC<LineProps> = ({
@@ -68,7 +60,6 @@ export const Line: FC<LineProps> = ({
         strokeWidth={width}
         strokeDasharray={dash}
       />
-      {children}
     </g>
   );
 };

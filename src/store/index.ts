@@ -1,5 +1,6 @@
 export * from "./reducers";
 export * from "./actions";
+import {ScaleTime, ScaleLinear} from "d3";
 
 export const initialState: AppState = {
   isLoading: false,
@@ -43,7 +44,13 @@ export type Curves =
   | "curveMonotoneX"
   | "curveCatmullRom";
 
-export type Scale = {x: any; y: any};
+export type Positions = "top" | "left" | "bottom" | "right";
+
+export type Scale = {x: XScale; y: YScale};
+
+export type XScale = ScaleTime<number, number> | null;
+
+export type YScale = ScaleLinear<number, number> | null;
 
 export type Dimension = {
   width: number;

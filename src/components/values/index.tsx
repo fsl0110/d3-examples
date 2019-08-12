@@ -3,6 +3,7 @@ import classNames from "classnames";
 import {Data, Item} from "../../store";
 import {useStore} from "../../hooks";
 import {StyledText, StyleProps} from "./styles";
+import {TextProps} from "..";
 
 interface Props extends SVGAttributes<SVGGElement> {
   /**
@@ -14,9 +15,9 @@ interface Props extends SVGAttributes<SVGGElement> {
   children?: never;
 }
 
-export type ValuesProps = Props & StyleProps;
+export type ValuesProps = Props & StyleProps & TextProps;
 
-export const Values: FC<ValuesProps> = ({tooltip, className}) => {
+export const Values: FC<ValuesProps> = ({tooltip, color, size, family, weight, letterSpacing, className}) => {
   const {
     state: {data, scale},
   } = useStore();
@@ -26,7 +27,18 @@ export const Values: FC<ValuesProps> = ({tooltip, className}) => {
   return (
     <g className={classNames("values", className)}>
       {dataToMap.map((item: Data, i: number) => (
-        <StyledText className="value" key={i} x={scale.x(item[0])} y={scale.y(item[1]) - 15} textAnchor="middle">
+        <StyledText
+          className="value"
+          key={i}
+          x={scale.x(item[0])}
+          y={scale.y(item[1]) - 15}
+          textAnchor="middle"
+          color={color}
+          size={size}
+          family={family}
+          weight={weight}
+          letterSpacing={letterSpacing}
+        >
           {item[1]}
         </StyledText>
       ))}

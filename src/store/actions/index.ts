@@ -52,10 +52,10 @@ export const setTooltip = (value: Tooltip): SetTooltip => ({
 
 export interface SetData {
   type: typeof SET_DATA;
-  payload: Array<(string | number)[]>;
+  payload: Array<string | number>;
 }
 
-export const setData = (payload: Array<(string | number)[]>): SetData => ({
+export const setData = (payload: Array<string | number>): SetData => ({
   type: SET_DATA,
   payload,
 });
