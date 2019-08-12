@@ -4,6 +4,6 @@
   "extends": "./stylelint",
   "rules": {
     "prettier/prettier": true,
-    "no-empty-source": true
+    "no-empty-source": null
   }
 }
