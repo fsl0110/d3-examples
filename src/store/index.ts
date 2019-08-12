@@ -1,4 +1,3 @@
-import {ScaleTime, ScaleLinear} from "d3";
 export * from "./reducers";
 export * from "./actions";
 
