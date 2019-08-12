@@ -5,6 +5,8 @@
   },
   "rules": {
     "no-any": false,
-    "no-shadowed-variable": false
+    "no-shadowed-variable": false,
+    "eofline": false,
+    "linebreak-style": false
   }
 }

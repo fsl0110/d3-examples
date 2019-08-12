@@ -142,7 +142,7 @@ module.exports = {
 
     // Maintainability
     "cyclomatic-complexity": ON,
-    eofline: OFF,
+    eofline: ON,
     indent: [ON, "spaces", 2],
     "linebreak-style": [ON, "LF"],
     "max-classes-per-file": [ON, 1],
