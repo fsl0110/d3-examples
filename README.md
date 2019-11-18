@@ -1,6 +1,6 @@
-# D3 Examples
+# Atomic Charts
 
-D3 examples made with React, Styled Components and TypeScript.
+D3 Chart Library using Atomic Design and React composition pattern.
 
 ## Available Scripts
 
