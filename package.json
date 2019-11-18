@@ -1,13 +1,13 @@
 {
-  "name": "@fsl0110/d3-examples",
-  "version": "0.1.0",
-  "description": "D3 examples",
+  "name": "atomic-charts",
+  "version": "0.0.1",
+  "description": "D3 Chart Library using Atomic Design and React composition pattern",
   "author": "Frank Simon Lechner",
   "private": true,
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/fsl0110/d3-examples.git"
+    "url": "https://github.com/fsl0110/atomic-charts.git"
   },
   "scripts": {
     "start": "react-scripts start",
