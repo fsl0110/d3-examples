@@ -16,7 +16,7 @@ export const Tooltip: FC<TooltipProps> = ({children, ...rest}) => {
   const bisectMouseValue = d3.bisector((d: Data) => d[0]).left;
 
   return (
-    <g transform={`translate(20,20)`} {...rest}>
+    <g {...rest}>
       <rect
         width={dimension.width}
         height={dimension.height}

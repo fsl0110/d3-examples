@@ -14,16 +14,18 @@ export const LineTooltip: FC = () => (
       scaleX="scaleTime"
       scaleY="scaleLinear"
       dimension={{width: 760, height: 460}}
+      margin={{top: 20, left: 20, bottom: 20, right: 20}}
     >
       <DrawZone>
         <Line />
         <Area />
+        <Tooltip>
+          <Values />
+          <Cross hideY={true} />
+          <Marker />
+        </Tooltip>
       </DrawZone>
-      <Tooltip>
-        <Values />
-        <Cross hideY={true} />
-        <Marker />
-      </Tooltip>
+
       <Axis align="axisLeft" />
       <Axis align="axisBottom" />
     </Chart>

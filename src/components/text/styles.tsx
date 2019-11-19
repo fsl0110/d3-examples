@@ -31,6 +31,8 @@ export interface StyleProps {
    * @default undefined
    */
   letterSpacing?: string;
+
+  transform?: string;
 }
 
 //tslint:disable

@@ -108,32 +108,37 @@ export const Axis: FC<AxisProps> = ({
   } = useStore();
   const [transform, currentScale] = useAxis(align, scale, dimension, margin);
 
+  console.log("currentScale", currentScale);
+  console.log("transform", transform);
+
   useEffect(() => {
-    // @ts-ignore
-    const axis = d3[align]().scale(currentScale);
+    if (scale.x) {
+      // @ts-ignore
+      const axis = d3[align]().scale(currentScale);
 
-    // api options
-    ticks && axis.ticks(ticks);
-    tickValues && axis.tickValues(tickValues);
-    tickArguments && axis.tickArguments(tickArguments);
-    tickFormat && axis.tickFormat(tickFormat);
-    (tickSize || tickSize === 0) && axis.tickSize(tickSize);
-    (tickSizeInner || tickSizeInner === 0) && axis.tickSizeInner(tickSizeInner);
-    (tickSizeOuter || tickSizeOuter === 0) && axis.tickSizeOuter(tickSizeOuter);
-    (tickPadding || tickPadding === 0) && axis.tickPadding(tickPadding);
+      // api options
+      ticks && axis.ticks(ticks);
+      tickValues && axis.tickValues(tickValues);
+      tickArguments && axis.tickArguments(tickArguments);
+      tickFormat && axis.tickFormat(tickFormat);
+      (tickSize || tickSize === 0) && axis.tickSize(tickSize);
+      (tickSizeInner || tickSizeInner === 0) && axis.tickSizeInner(tickSizeInner);
+      (tickSizeOuter || tickSizeOuter === 0) && axis.tickSizeOuter(tickSizeOuter);
+      (tickPadding || tickPadding === 0) && axis.tickPadding(tickPadding);
 
-    const g = d3.select(el.current).call(axis);
+      const g = d3.select(el.current).call(axis);
 
-    hideAxisLine && g.select(".domain").remove();
+      hideAxisLine && g.select(".domain").remove();
 
-    tickTextPosition &&
-      g
-        .selectAll(".tick text")
-        .attr("x", tickTextPosition[0])
-        .attr("dy", tickTextPosition[1]);
+      tickTextPosition &&
+        g
+          .selectAll(".tick text")
+          .attr("x", tickTextPosition[0])
+          .attr("dy", tickTextPosition[1]);
 
-    d3.select(".axis .tick:nth-child(1) text").remove();
-  });
+      d3.select(".axis .tick:nth-child(1) text").remove();
+    }
+  }, [currentScale]);
 
   return (
     <StyledAxisG
